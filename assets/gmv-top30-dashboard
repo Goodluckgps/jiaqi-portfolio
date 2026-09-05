@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://4nnyfblq.qwenwork.host/?spm=7054cd9.7aa848ac.0.0.50df99adnuKSqE -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>var __mr='all',__md='4nnyfblq.qwenwork.host';document.addEventListener('DOMContentLoaded', function () {
+  var BAR_HEIGHT = 48;
+
+  // --- detect page theme ---
+  var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // fallback: sample body/html background color
+  if (!isDark) {
+    try {
+      var sample = getComputedStyle(document.body).backgroundColor;
+      if (sample === 'rgba(0, 0, 0, 0)' || sample === 'transparent') {
+        sample = getComputedStyle(document.documentElement).backgroundColor;
+      }
+      if (sample && sample !== 'rgba(0, 0, 0, 0)' && sample !== 'transparent') {
+        var m = sample.match(/\d+/g);
+        if (m) {
+          var brightness = (parseInt(m[0]) * 299 + parseInt(m[1]) * 587 + parseInt(m[2]) * 114) / 1000;
+          isDark = brightness < 128;
+        }
+      }
+    } catch (e) {}
+  }
+
+  // --- shared CSS (always injected into <head>) ---
+  var SHARED_CSS = '<style>' +
+    '@keyframes mulepage-svg-glow-dark{0%,100%{color:#ffffff}50%{color:#3b82f6}}' +
+    '@keyframes mulepage-svg-glow-light{0%,100%{color:#000000}50%{color:#3b82f6}}' +
+    '.mulepage-anim-dark{animation:mulepage-svg-glow-dark 2.5s ease-in-out infinite}' +
+    '.mulepage-anim-light{animation:mulepage-svg-glow-light 2.5s ease-in-out infinite}' +
+    '.mulepage-close-dark{color:rgba(255,255,255,0.3);transition:color 0.2s ease}' +
+    '.mulepage-close-dark:hover{color:#ffffff}' +
+    '.mulepage-close-light{color:rgba(0,0,0,0.3);transition:color 0.2s ease}' +
+    '.mulepage-close-light:hover{color:#000000}' +
+    '#mulepage-footer-link{transition:opacity 0.2s ease}' +
+    '#mulepage-footer-link:hover{opacity:0.7}' +
+    '.mulepage-float-close{display:inline-flex;align-items:center;justify-content:center;max-width:0;margin-left:0;overflow:hidden;opacity:0;transition:max-width 0.2s ease,margin-left 0.2s ease,opacity 0.15s ease;padding:0;border:none;background:none;cursor:pointer;font-size:16px;line-height:1;font-weight:300;height:16px;will-change:max-width,opacity}' +
+    '.mulepage-float:hover .mulepage-float-close{max-width:14px;margin-left:4px;opacity:1}' +
+    '</style>';
+
+  // always inject shared CSS into <head> so it survives banner removal
+  document.head.insertAdjacentHTML('beforeend', SHARED_CSS);
+
+  // --- SVG icon (shared, rx=0 for sharp corners) ---
+  var ICON16 = '<svg width="16" height="16" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<rect width="36" height="36" rx="0" fill="#FBF9F6"/><g clip-path="url(#c_top)">' +
+    '<path d="M6.387 21.732v8.895H18.762V28.5h2.32v1.16h8.121V28.5h1.16v-7.928h-1.16v-1.16h-4.64v-1.16h-1.16v-1.16h-1.16v-1.16h-1.16v-1.16h-1.16v-1.16h3.287v-1.934h3.48V9.357H16.442v3.48h-2.128V6.07h-2.32v2.127H9.674v3.48H7.547v10.055H6.387Z" fill="#000"/>' +
+    '<path d="M13.154 21.732v-4.447h1.16v-1.16h4.448v4.447h-1.16v1.16h-4.448Z" fill="#fff"/>' +
+    '<rect x="15.281" y="18.252" width="2.32" height="2.32" fill="#000"/>' +
+    '<path d="M21.082 27.34v-5.608h1.16v-1.16h5.801v1.16h1.16v5.608h-1.16V28.5h-5.801v-1.16h-1.16Z" fill="#fff"/>' +
+    '<path d="M26.883 21.732h-2.32v1.16h1.16v1.16h1.16v-2.32Z" fill="#000"/>' +
+    '<path d="M22.242 24.053v2.32h1.16v1.16h3.48v-1.16h-2.32v-1.16h-1.16v-1.16h-1.16Z" fill="#000"/>' +
+    '</g><defs><clipPath id="c_top"><rect width="24.75" height="24.75" fill="#fff" transform="translate(6 6)"/></clipPath></defs></svg>';
+
+  var ICON16_FOOT = ICON16.replace(/c_top/g, 'c_foot');
+
+  // --- 品牌标志：浅色主题使用原始深色 SVG，深色主题反相为白色。 ---
+  var brandAssetFilter = isDark ? 'filter:invert(1);' : '';
+  var BRAND_MARK = '<span style="display:inline-flex;align-items:center;gap:4px;line-height:0;">' +
+    '<img src="https://gw.alicdn.com/imgextra/i3/O1CN01KjiMsP20F9vea7rMy_!!6000000006819-55-tps-20-20.svg" alt="" width="20" height="20" style="display:block;user-select:none;' + brandAssetFilter + '" />' +
+    '<img src="https://gw.alicdn.com/imgextra/i2/O1CN01Hn0m411NLmdtyiXpF_!!6000000001554-55-tps-56-14.svg" alt="千问办公" width="56" height="14" style="display:block;user-select:none;' + brandAssetFilter + '" />' +
+    '</span>';
+  // 20 + 4 + 56 + 24 = 104px，与设计稿的 104 × 32 品牌胶囊一致。
+  var TOP_BRAND_LOGO = '<span style="display:inline-flex;align-items:center;justify-content:center;width:104px;height:32px;padding:6px 12px;box-sizing:border-box;border-radius:999px;' +
+    'background:' + (isDark ? 'rgba(255,255,255,0.12)' : '#f5f5f5') + ';">' + BRAND_MARK + '</span>';
+  // 右下角入口沿用同一品牌胶囊，确保两个入口的品牌识别一致。
+  var FOOTER_BRAND_LOGO = TOP_BRAND_LOGO;
+
+  // --- banner (adapts to page theme) ---
+  var bannerBg = isDark ? '#050505' : '#ffffff';
+  var bannerBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)';
+  var bannerColor = isDark ? '#fff' : '#000';
+  var bannerDividerColor = isDark ? 'rgba(255,255,255,0.24)' : 'rgba(0,0,0,0.16)';
+  var bannerCloseClass = isDark ? 'mulepage-close-dark' : 'mulepage-close-light';
+
+  var BANNER = '<div id="mulepage-bar" dir="ltr" style="position:fixed;top:0;left:0;width:100%;height:' + BAR_HEIGHT + 'px;' +
+    'background:' + bannerBg + ';border-bottom:1px solid ' + bannerBorder + ';color:' + bannerColor + ';' +
+    'box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:8px;' +
+    'font-family:\'PingFang SC\',Inter,-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;' +
+    'font-size:14px;font-weight:500;line-height:20px;z-index:2147483647;">' +
+    '<span aria-hidden="true" style="flex:1 1 0;height:32px;"></span>' +
+    '<div style="display:flex;align-items:center;gap:8px;white-space:nowrap;">' +
+    '<span>由</span>' +
+    '<span id="mulepage-bar-link" role="link" tabindex="0" aria-label="打开千问办公" style="display:inline-flex;align-items:center;cursor:pointer;line-height:0;">' +
+    TOP_BRAND_LOGO + '</span>' +
+    '<span>创建</span>' +
+    '<span aria-hidden="true" style="width:1px;height:16px;margin:0 4px;background:' + bannerDividerColor + ';"></span>' +
+    '<span id="mulepage-bar-cta" role="link" tabindex="0" aria-label="用千问办公创建网站" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:999px;cursor:pointer;">' +
+    '<span>一句话创建你的网站</span><span aria-hidden="true" style="font-size:16px;line-height:16px;">\u2192</span></span>' +
+    '</div>' +
+    '<span style="flex:1 1 0;display:flex;justify-content:flex-end;align-items:center;">' +
+    '<button id="mulepage-bar-close" class="' + bannerCloseClass + '" aria-label="关闭千问办公品牌栏" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:8px;background:none;border:none;border-radius:999px;' +
+    'font-size:18px;cursor:pointer;line-height:16px;font-weight:300;">\u00d7</button></span>' +
+    '</div>';
+
+  // --- 右下角品牌入口 ---
+  var floatCloseColor = isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.3)';
+  var floatCloseHover = isDark ? '#ffffff' : '#000000';
+  var byColor = isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)';
+
+  var FOOTER = '<div id="mulepage-footer" dir="ltr" class="mulepage-float" style="position:fixed !important;bottom:16px !important;right:16px !important;z-index:2147483646;' +
+    'display:inline-flex;align-items:center;padding:0;cursor:pointer;background:transparent;border:0;box-shadow:none;' +
+    'font-family:Inter,-apple-system,BlinkMacSystemFont,\'Segoe UI\',\'Helvetica Neue\',sans-serif;">' +
+    '<span id="mulepage-footer-link" style="display:inline-flex;align-items:center;line-height:0;">' +
+    FOOTER_BRAND_LOGO +
+    '</span>' +
+    '</div>';
+
+  // --- insert banner (only when mode is "all") ---
+  if (__mr === 'all') {
+    document.body.insertAdjacentHTML('afterbegin', BANNER);
+
+    // 顶栏品牌标志和行动文案均跳转至千问办公。
+    var openQwenWork = function () {
+      window.open('https://qwenwork.cn?utm_source=pages&utm_medium=banner&utm_campaign=pages_branding&utm_content=top_bar', '_blank', 'noopener');
+    };
+    var topBrandLink = document.getElementById('mulepage-bar-link');
+    var topBrandCta = document.getElementById('mulepage-bar-cta');
+    topBrandLink.addEventListener('click', openQwenWork);
+    topBrandCta.addEventListener('click', openQwenWork);
+    topBrandLink.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openQwenWork();
+      }
+    });
+    topBrandCta.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openQwenWork();
+      }
+    });
+
+    // Use the QwenWork favicon only as a fallback. Preserve favicons generated
+    // by the page itself so published sites can keep their own branding.
+    var existingIcon = document.querySelector('link[rel="icon"],link[rel="shortcut icon"]');
+    if (!existingIcon) {
+      var fi = document.createElement('link');
+      fi.rel = 'icon';
+      fi.type = 'image/svg+xml';
+      fi.href = 'https://qwenwork.cn/app/favicon.svg';
+      document.head.appendChild(fi);
+    }
+
+    // push down normal-flow content (accumulate on existing padding-top)
+    var origPT = parseFloat(getComputedStyle(document.body).paddingTop) || 0;
+    document.body.style.paddingTop = (origPT + BAR_HEIGHT) + 'px';
+
+    // push down all existing position:fixed elements
+    var all = document.querySelectorAll('*');
+    var shifted = [];
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el.id && el.id.indexOf('mulepage') === 0) continue;
+      var cs = getComputedStyle(el);
+      if (cs.position === 'fixed') {
+        var t = parseFloat(cs.top);
+        if (isNaN(t)) t = 0;
+        el.style.top = (t + BAR_HEIGHT) + 'px';
+        shifted.push({ el: el, orig: t });
+      }
+    }
+
+    // close handler: restore everything
+    document.getElementById('mulepage-bar-close').addEventListener('click', function () {
+      document.getElementById('mulepage-bar').remove();
+      document.body.style.paddingTop = origPT + 'px';
+      for (var j = 0; j < shifted.length; j++) {
+        shifted[j].el.style.top = shifted[j].orig + 'px';
+      }
+    });
+  }
+
+  // --- insert floating widget (only when __mr is set) ---
+  if (__mr) {
+    document.body.insertAdjacentHTML('beforeend', FOOTER);
+
+    // 底部品牌标志点击后打开官网
+    var footerLink = document.getElementById('mulepage-footer-link');
+    if (footerLink) {
+      footerLink.addEventListener('click', function () {
+        window.open('https://qwenwork.cn?utm_source=pages&utm_medium=banner&utm_campaign=pages_branding&utm_content=bottom_bar', '_blank', 'noopener');
+      });
+    }
+
+    // paid users (footer-only mode): add close button on hover
+    if (__mr === 'footer') {
+      var floatEl = document.getElementById('mulepage-footer');
+      if (floatEl) {
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'mulepage-float-close';
+        closeBtn.style.color = floatCloseColor;
+        closeBtn.textContent = '\u00d7';
+        closeBtn.addEventListener('mouseenter', function () { closeBtn.style.color = floatCloseHover; });
+        closeBtn.addEventListener('mouseleave', function () { closeBtn.style.color = floatCloseColor; });
+        closeBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          floatEl.remove();
+        });
+        floatEl.appendChild(closeBtn);
+      }
+    }
+  }
+
+  // --- inject canonical link (all users) ---
+  var canon = document.createElement('link');
+  canon.rel = 'canonical';
+  canon.href = 'https://' + location.hostname + '/';
+  document.head.appendChild(canon);
+
+  // --- inject og meta tags (all users) ---
+  var ogDomain = __md;
+  var ogTitle = document.title || ogDomain;
+  var ogTags = [
+    ['og:title', ogTitle],
+    ['og:url', 'https://' + location.hostname + '/'],
+    ['og:type', 'website'],
+    ['og:image', 'https://mule.page/og/' + ogDomain + '.webp']
+  ];
+  for (var n = 0; n < ogTags.length; n++) {
+    var existing = document.querySelector('meta[property="' + ogTags[n][0] + '"]');
+    if (existing) existing.remove();
+    var meta = document.createElement('meta');
+    meta.setAttribute('property', ogTags[n][0]);
+    meta.setAttribute('content', ogTags[n][1]);
+    document.head.appendChild(meta);
+  }
+});
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李佳琦直播间 宝贝 GMV Top30 看板</title>
+<script src="./李佳琦直播间 宝贝 GMV Top30 看板_files/xlsx.full.min.js.下载"></script>
+<style>
+:root{
+  --bg:#f4f6fb; --card:#ffffff; --border:#e6eaf2; --text:#1f2937; --sub:#6b7280;
+  --primary:#4D7EFF; --primary-soft:#eef3ff;
+  --shadow:0 1px 3px rgba(30,41,80,.06),0 4px 16px rgba(30,41,80,.06);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);padding:20px 24px 40px}
+h1{font-size:20px;font-weight:700}
+.header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.header .sub{font-size:12px;color:var(--sub);margin-top:4px}
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);font-size:13px;cursor:pointer;transition:.15s;color:var(--text)}
+.btn:hover{border-color:var(--primary);color:var(--primary)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn.primary:hover{opacity:.9;color:#fff}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:14px 16px;margin-bottom:14px}
+.filters{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.filter-item{display:flex;align-items:center;gap:8px;font-size:13px}
+.filter-item label{color:var(--sub);white-space:nowrap}
+select,input[type=text]{padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:#fff;color:var(--text);outline:none;min-width:110px}
+select:focus,input:focus{border-color:var(--primary)}
+.seg{display:inline-flex;background:var(--primary-soft);border-radius:8px;padding:3px}
+.seg button{border:none;background:transparent;padding:6px 14px;font-size:13px;border-radius:6px;cursor:pointer;color:var(--sub);white-space:nowrap}
+.seg button.active{background:#fff;color:var(--primary);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi .v{font-size:22px;font-weight:700;margin:2px 0}
+.kpi .l{font-size:12px;color:var(--sub)}
+.boards{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
+.board{min-width:340px;flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.board-head{padding:10px 14px;color:#fff;font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.board-head .total{font-size:11px;font-weight:400;opacity:.9}
+.board table{width:100%;border-collapse:collapse;font-size:12px}
+.board th{position:sticky;top:0;background:#fafbfe;color:var(--sub);font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;z-index:1}
+.board td{padding:6px 8px;border-bottom:1px solid #f1f3f9;vertical-align:top}
+.board tr:nth-child(even) td{background:#f8faff}
+.board tbody tr:hover td{background:var(--primary-soft)}
+.board .tbl-wrap{max-height:560px;overflow-y:auto}
+.rank{display:inline-flex;width:22px;height:22px;border-radius:6px;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:#fff;background:#c3cbdc}
+.rank.r1{background:linear-gradient(135deg,#f6d365,#fda085)}
+.rank.r2{background:linear-gradient(135deg,#8fb8f6,#6f9cf0)}
+.rank.r3{background:linear-gradient(135deg,#c99bf0,#a18cd1)}
+.pname{max-width:200px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4}
+.shop{color:var(--sub);font-size:11px}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.gmv{font-weight:600}
+.empty{padding:60px 20px;text-align:center;color:var(--sub);font-size:14px}
+.empty .big{font-size:40px;margin-bottom:12px}
+.hint{font-size:12px;color:var(--sub)}
+.tag{display:inline-block;background:var(--primary-soft);color:var(--primary);border-radius:6px;padding:2px 8px;font-size:11px;margin-left:8px}
+.modal-mask{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;z-index:50}
+.modal{background:#fff;border-radius:14px;padding:22px 24px;width:520px;max-width:92vw;max-height:85vh;overflow-y:auto}
+.modal h3{font-size:16px;margin-bottom:6px}
+.modal .desc{font-size:12px;color:var(--sub);margin-bottom:14px}
+.map-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px}
+.map-row label{width:120px;color:var(--sub)}
+.map-row select{flex:1}
+.modal .foot{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.bar-cell{position:relative}
+.bar-bg{position:absolute;left:0;top:2px;bottom:2px;background:var(--primary-soft);border-radius:3px;z-index:0}
+.bar-cell span{position:relative;z-index:1}
+@media (max-width:768px){body{padding:12px}.board{min-width:300px}}
+</style>
+<style>@keyframes mulepage-svg-glow-dark{0%,100%{color:#ffffff}50%{color:#3b82f6}}@keyframes mulepage-svg-glow-light{0%,100%{color:#000000}50%{color:#3b82f6}}.mulepage-anim-dark{animation:mulepage-svg-glow-dark 2.5s ease-in-out infinite}.mulepage-anim-light{animation:mulepage-svg-glow-light 2.5s ease-in-out infinite}.mulepage-close-dark{color:rgba(255,255,255,0.3);transition:color 0.2s ease}.mulepage-close-dark:hover{color:#ffffff}.mulepage-close-light{color:rgba(0,0,0,0.3);transition:color 0.2s ease}.mulepage-close-light:hover{color:#000000}#mulepage-footer-link{transition:opacity 0.2s ease}#mulepage-footer-link:hover{opacity:0.7}.mulepage-float-close{display:inline-flex;align-items:center;justify-content:center;max-width:0;margin-left:0;overflow:hidden;opacity:0;transition:max-width 0.2s ease,margin-left 0.2s ease,opacity 0.15s ease;padding:0;border:none;background:none;cursor:pointer;font-size:16px;line-height:1;font-weight:300;height:16px;will-change:max-width,opacity}.mulepage-float:hover .mulepage-float-close{max-width:14px;margin-left:4px;opacity:1}</style><link rel="icon" type="image/svg+xml" href="https://qwenwork.cn/app/favicon.svg"><link rel="canonical" href="https://4nnyfblq.qwenwork.host/"><meta property="og:title" content="李佳琦直播间 宝贝 GMV Top30 看板"><meta property="og:url" content="https://4nnyfblq.qwenwork.host/"><meta property="og:type" content="website"><meta property="og:image" content="https://mule.page/og/4nnyfblq.qwenwork.host.webp"></head>
+<body style="padding-top: 68px;"><div id="mulepage-bar" dir="ltr" style="position:fixed;top:0;left:0;width:100%;height:48px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06);color:#000;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:8px;font-family:&#39;PingFang SC&#39;,Inter,-apple-system,BlinkMacSystemFont,&#39;Segoe UI&#39;,sans-serif;font-size:14px;font-weight:500;line-height:20px;z-index:2147483647;"><span aria-hidden="true" style="flex:1 1 0;height:32px;"></span><div style="display:flex;align-items:center;gap:8px;white-space:nowrap;"><span>由</span><span id="mulepage-bar-link" role="link" tabindex="0" aria-label="打开千问办公" style="display:inline-flex;align-items:center;cursor:pointer;line-height:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:104px;height:32px;padding:6px 12px;box-sizing:border-box;border-radius:999px;background:#f5f5f5;"><span style="display:inline-flex;align-items:center;gap:4px;line-height:0;"><img src="./李佳琦直播间 宝贝 GMV Top30 看板_files/O1CN01KjiMsP20F9vea7rMy_!!6000000006819-55-tps-20-20.svg" alt="" width="20" height="20" style="display:block;user-select:none;"><img src="./李佳琦直播间 宝贝 GMV Top30 看板_files/O1CN01Hn0m411NLmdtyiXpF_!!6000000001554-55-tps-56-14.svg" alt="千问办公" width="56" height="14" style="display:block;user-select:none;"></span></span></span><span>创建</span><span aria-hidden="true" style="width:1px;height:16px;margin:0 4px;background:rgba(0,0,0,0.16);"></span><span id="mulepage-bar-cta" role="link" tabindex="0" aria-label="用千问办公创建网站" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:999px;cursor:pointer;"><span>一句话创建你的网站</span><span aria-hidden="true" style="font-size:16px;line-height:16px;">→</span></span></div><span style="flex:1 1 0;display:flex;justify-content:flex-end;align-items:center;"><button id="mulepage-bar-close" class="mulepage-close-light" aria-label="关闭千问办公品牌栏" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:8px;background:none;border:none;border-radius:999px;font-size:18px;cursor:pointer;line-height:16px;font-weight:300;">×</button></span></div>
+
+<div class="header">
+  <div>
+    <h1>李佳琦直播间 宝贝 GMV Top30 看板 <span class="tag" id="dataTag">演示数据 · 3129 行</span></h1>
+    <div class="sub">上传底表（直播间宝贝排行 xlsx）后自动识别6个品类分块并扁平化 · 支持按月 / 多月 / 季度 / 半年 / 全年查看</div>
+  </div>
+  <div class="toolbar">
+    <button class="btn primary" onclick="document.getElementById(&#39;fileInput&#39;).click()">⬆ 上传底表</button>
+    <button class="btn" onclick="loadDemo()">演示数据</button>
+    <button class="btn" onclick="exportCSV()">⬇ 导出当前视图</button>
+    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(this.files[0])">
+  </div>
+</div>
+
+<div class="panel">
+  <div class="filters">
+    <div class="filter-item">
+      <label>时间粒度</label>
+      <div class="seg" id="granSeg">
+        <button data-g="month" class="active">每月</button>
+        <button data-g="quarter">季度</button>
+        <button data-g="half">半年</button>
+        <button data-g="year">全年</button>
+        <button data-g="range">多月自选</button>
+      </div>
+    </div>
+    <div class="filter-item" id="periodBox" style="display: flex;">
+      <label>时间段</label>
+      <select id="periodSel" onchange="render()"><option value="2025-01">2025-01</option><option value="2025-02">2025-02</option><option value="2025-03">2025-03</option><option value="2025-04">2025-04</option><option value="2025-05">2025-05</option><option value="2025-06">2025-06</option><option value="2025-07">2025-07</option><option value="2025-08">2025-08</option><option value="2025-09">2025-09</option><option value="2025-10">2025-10</option><option value="2025-11">2025-11</option><option value="2025-12">2025-12</option><option value="2026-01">2026-01</option><option value="2026-02">2026-02</option><option value="2026-03">2026-03</option><option value="2026-04">2026-04</option><option value="2026-05">2026-05</option><option value="2026-06">2026-06</option></select>
+    </div>
+    <div class="filter-item" id="rangeBox" style="display:none">
+      <label>从</label><select id="rangeFrom" onchange="render()"></select>
+      <label>到</label><select id="rangeTo" onchange="render()"></select>
+    </div>
+    <div class="filter-item">
+      <label>品类</label>
+      <select id="catSel" onchange="render()"><option value="__all__">全部品类</option><option value="美容护肤/美体/精油">美容护肤/美体/精油</option><option value="洁面">洁面</option><option value="乳液/面霜">乳液/面霜</option><option value="面部护理套装">面部护理套装</option><option value="眼霜">眼霜</option></select>
+    </div>
+    <div class="filter-item">
+      <label>Top N</label>
+      <select id="topnSel" onchange="render()">
+        <option value="10">Top 10</option>
+        <option value="30" selected="">Top 30</option>
+        <option value="50">Top 50</option>
+        <option value="0">全部</option>
+      </select>
+    </div>
+    <div class="filter-item" style="flex:1;min-width:180px">
+      <label>搜索</label>
+      <input type="text" id="searchInput" placeholder="产品名 / 店铺名…" oninput="render()" style="width:100%">
+    </div>
+  </div>
+</div>
+
+<div class="kpis" id="kpiRow"><div class="kpi"><div class="l">当前时间段</div><div class="v">2026-06</div><div class="l">1 个月</div></div><div class="kpi"><div class="l">总 GMV</div><div class="v">¥7.42 亿</div><div class="l"></div></div><div class="kpi"><div class="l">总销量</div><div class="v">151.4 万</div><div class="l"></div></div><div class="kpi"><div class="l">品类数</div><div class="v">5</div><div class="l"></div></div><div class="kpi"><div class="l">商品数（去重）</div><div class="v">171</div><div class="l"></div></div></div>
+<div class="boards" id="boards"><div class="board">
+      <div class="board-head" style="background:#2f5fd0">
+        <span>美容护肤/美体/精油</span>
+        <span class="total">GMV ¥1.64 亿 · 34 个商品</span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th style="width:36px">#</th><th>产品 / 店铺</th><th class="num">GMV</th><th class="num">销量</th></tr></thead>
+        <tbody><tr>
+        <td><span class="rank r1">1</span></td>
+        <td><div class="pname" title="修丽可AGE面霜 30%玻色因抗皱抗糖紧致淡纹">修丽可AGE面霜 30%玻色因抗皱抗糖紧致淡纹</div><div class="shop">修丽可官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:100%"></div><span>53,689,665</span></td>
+        <td class="num">60,129</td>
+      </tr><tr>
+        <td><span class="rank r2">2</span></td>
+        <td><div class="pname" title="【加购】李佳琦直播间 兰蔻菁纯面霜臻宠礼盒">【加购】李佳琦直播间 兰蔻菁纯面霜臻宠礼盒</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:31.921568145377698%"></div><span>17,138,583</span></td>
+        <td class="num">27,714</td>
+      </tr><tr>
+        <td><span class="rank r3">3</span></td>
+        <td><div class="pname" title="欧莱雅紫熨斗眼霜二代 淡纹紧致">欧莱雅紫熨斗眼霜二代 淡纹紧致</div><div class="shop">欧莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:14.447383868012587%"></div><span>7,756,752</span></td>
+        <td class="num">8,110</td>
+      </tr><tr>
+        <td><span class="rank">4</span></td>
+        <td><div class="pname" title="修丽可AGE面霜 30% 替换装/中样 #10">修丽可AGE面霜 30% 替换装/中样 #10</div><div class="shop">修丽可官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:13.493157388856869%"></div><span>7,244,431</span></td>
+        <td class="num">31,971</td>
+      </tr><tr>
+        <td><span class="rank">5</span></td>
+        <td><div class="pname" title="薇诺娜舒敏保湿特护霜 50g">薇诺娜舒敏保湿特护霜 50g</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:11.505145357118545%"></div><span>6,177,074</span></td>
+        <td class="num">6,954</td>
+      </tr><tr>
+        <td><span class="rank">6</span></td>
+        <td><div class="pname" title="SK-II神仙水精华露 230ml">SK-II神仙水精华露 230ml</div><div class="shop">SK-II官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.474174126435692%"></div><span>5,623,549</span></td>
+        <td class="num">5,830</td>
+      </tr><tr>
+        <td><span class="rank">7</span></td>
+        <td><div class="pname" title="赫莲娜黑绷带面霜 50m 替换装/中样 #12">赫莲娜黑绷带面霜 50m 替换装/中样 #12</div><div class="shop">hr赫莲娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:9.80590584798769%"></div><span>5,264,758</span></td>
+        <td class="num">32,179</td>
+      </tr><tr>
+        <td><span class="rank">8</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶精华 第七代 100ml">雅诗兰黛小棕瓶精华 第七代 100ml</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.650137787225903%"></div><span>4,644,230</span></td>
+        <td class="num">22,225</td>
+      </tr><tr>
+        <td><span class="rank">9</span></td>
+        <td><div class="pname" title="娇兰复原蜜黄金复原蜜精华">娇兰复原蜜黄金复原蜜精华</div><div class="shop">娇兰官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.315499826642615%"></div><span>4,464,564</span></td>
+        <td class="num">12,450</td>
+      </tr><tr>
+        <td><span class="rank">10</span></td>
+        <td><div class="pname" title="珀莱雅红宝石面霜3.0  替换装/中样 #16">珀莱雅红宝石面霜3.0  替换装/中样 #16</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.239965736422457%"></div><span>4,424,010</span></td>
+        <td class="num">14,707</td>
+      </tr><tr>
+        <td><span class="rank">11</span></td>
+        <td><div class="pname" title="资生堂红腰子精华 100ml">资生堂红腰子精华 100ml</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:7.791184765261621%"></div><span>4,183,061</span></td>
+        <td class="num">13,800</td>
+      </tr><tr>
+        <td><span class="rank">12</span></td>
+        <td><div class="pname" title="修丽可AGE面霜 30% 替换装/中样 #20">修丽可AGE面霜 30% 替换装/中样 #20</div><div class="shop">修丽可官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.888117107826991%"></div><span>3,698,207</span></td>
+        <td class="num">4,597</td>
+      </tr><tr>
+        <td><span class="rank">13</span></td>
+        <td><div class="pname" title="珀莱雅红宝石面霜3.0 抗皱淡纹">珀莱雅红宝石面霜3.0 抗皱淡纹</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.821752380090283%"></div><span>3,662,576</span></td>
+        <td class="num">13,730</td>
+      </tr><tr>
+        <td><span class="rank">14</span></td>
+        <td><div class="pname" title="欧莱雅紫熨斗眼霜二代 淡 替换装/中样 #13">欧莱雅紫熨斗眼霜二代 淡 替换装/中样 #13</div><div class="shop">欧莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.705792725657722%"></div><span>3,063,421</span></td>
+        <td class="num">4,680</td>
+      </tr><tr>
+        <td><span class="rank">15</span></td>
+        <td><div class="pname" title="【加购】李佳琦直播间 兰 替换装/中样 #11">【加购】李佳琦直播间 兰 替换装/中样 #11</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.455321801691257%"></div><span>2,928,944</span></td>
+        <td class="num">3,357</td>
+      </tr><tr>
+        <td><span class="rank">16</span></td>
+        <td><div class="pname" title="娇兰复原蜜黄金复原蜜精华 替换装/中样 #28">娇兰复原蜜黄金复原蜜精华 替换装/中样 #28</div><div class="shop">娇兰官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.93608593013199%"></div><span>2,650,168</span></td>
+        <td class="num">4,383</td>
+      </tr><tr>
+        <td><span class="rank">17</span></td>
+        <td><div class="pname" title="薇诺娜舒敏保湿特护霜 5 替换装/中样 #17">薇诺娜舒敏保湿特护霜 5 替换装/中样 #17</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.899281826399923%"></div><span>2,630,408</span></td>
+        <td class="num">2,799</td>
+      </tr><tr>
+        <td><span class="rank">18</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶精华 第七 替换装/中样 #14">雅诗兰黛小棕瓶精华 第七 替换装/中样 #14</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.54441092154328%"></div><span>2,439,879</span></td>
+        <td class="num">5,305</td>
+      </tr><tr>
+        <td><span class="rank">19</span></td>
+        <td><div class="pname" title="资生堂红腰子精华 100 替换装/中样 #19">资生堂红腰子精华 100 替换装/中样 #19</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.4127300850172935%"></div><span>2,369,180</span></td>
+        <td class="num">4,790</td>
+      </tr><tr>
+        <td><span class="rank">20</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶精华 第七 替换装/中样 #34">雅诗兰黛小棕瓶精华 第七 替换装/中样 #34</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.938396710055837%"></div><span>2,114,512</span></td>
+        <td class="num">7,665</td>
+      </tr><tr>
+        <td><span class="rank">21</span></td>
+        <td><div class="pname" title="赫莲娜黑绷带面霜 50m 替换装/中样 #22">赫莲娜黑绷带面霜 50m 替换装/中样 #22</div><div class="shop">hr赫莲娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.9255674253136057%"></div><span>2,107,624</span></td>
+        <td class="num">3,454</td>
+      </tr><tr>
+        <td><span class="rank">22</span></td>
+        <td><div class="pname" title="SK-II神仙水精华露  替换装/中样 #35">SK-II神仙水精华露  替换装/中样 #35</div><div class="shop">SK-II官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.475825375330616%"></div><span>1,866,159</span></td>
+        <td class="num">6,554</td>
+      </tr><tr>
+        <td><span class="rank">23</span></td>
+        <td><div class="pname" title="资生堂红腰子精华 100 替换装/中样 #29">资生堂红腰子精华 100 替换装/中样 #29</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2.766858388853795%"></div><span>1,485,517</span></td>
+        <td class="num">2,869</td>
+      </tr><tr>
+        <td><span class="rank">24</span></td>
+        <td><div class="pname" title="【加购】李佳琦直播间 兰 替换装/中样 #21">【加购】李佳琦直播间 兰 替换装/中样 #21</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2.6710485155755768%"></div><span>1,434,077</span></td>
+        <td class="num">5,965</td>
+      </tr><tr>
+        <td><span class="rank">25</span></td>
+        <td><div class="pname" title="娇兰复原蜜黄金复原蜜精华 替换装/中样 #38">娇兰复原蜜黄金复原蜜精华 替换装/中样 #38</div><div class="shop">娇兰官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2.5986155808571354%"></div><span>1,395,188</span></td>
+        <td class="num">7,812</td>
+      </tr><tr>
+        <td><span class="rank">26</span></td>
+        <td><div class="pname" title="薇诺娜舒敏保湿特护霜 5 替换装/中样 #27">薇诺娜舒敏保湿特护霜 5 替换装/中样 #27</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2.4064929442193392%"></div><span>1,292,038</span></td>
+        <td class="num">1,413</td>
+      </tr><tr>
+        <td><span class="rank">27</span></td>
+        <td><div class="pname" title="SK-II神仙水精华露  替换装/中样 #15">SK-II神仙水精华露  替换装/中样 #15</div><div class="shop">SK-II官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2.320467076857343%"></div><span>1,245,851</span></td>
+        <td class="num">3,332</td>
+      </tr><tr>
+        <td><span class="rank">28</span></td>
+        <td><div class="pname" title="薇诺娜舒敏保湿特护霜 5 替换装/中样 #37">薇诺娜舒敏保湿特护霜 5 替换装/中样 #37</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2.1952586219340353%"></div><span>1,178,627</span></td>
+        <td class="num">1,452</td>
+      </tr><tr>
+        <td><span class="rank">29</span></td>
+        <td><div class="pname" title="【加购】李佳琦直播间 兰 替换装/中样 #31">【加购】李佳琦直播间 兰 替换装/中样 #31</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2%"></div><span>1,037,780</span></td>
+        <td class="num">2,250</td>
+      </tr><tr>
+        <td><span class="rank">30</span></td>
+        <td><div class="pname" title="欧莱雅紫熨斗眼霜二代 淡 替换装/中样 #23">欧莱雅紫熨斗眼霜二代 淡 替换装/中样 #23</div><div class="shop">欧莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2%"></div><span>989,793</span></td>
+        <td class="num">1,497</td>
+      </tr></tbody>
+      </table></div>
+    </div><div class="board">
+      <div class="board-head" style="background:#5aa14a">
+        <span>面部护理套装</span>
+        <span class="total">GMV ¥1.60 亿 · 37 个商品</span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th style="width:36px">#</th><th>产品 / 店铺</th><th class="num">GMV</th><th class="num">销量</th></tr></thead>
+        <tbody><tr>
+        <td><span class="rank r1">1</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶七夕限定礼盒">雅诗兰黛小棕瓶七夕限定礼盒</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:100%"></div><span>25,258,470</span></td>
+        <td class="num">74,297</td>
+      </tr><tr>
+        <td><span class="rank r2">2</span></td>
+        <td><div class="pname" title="【美妆节】兰蔻小黑瓶精华水乳护肤套装">【美妆节】兰蔻小黑瓶精华水乳护肤套装</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:83.77772287870168%"></div><span>21,160,971</span></td>
+        <td class="num">37,134</td>
+      </tr><tr>
+        <td><span class="rank r3">3</span></td>
+        <td><div class="pname" title="珀莱雅早C晚A精华套装">珀莱雅早C晚A精华套装</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:81.248203078017%"></div><span>20,522,053</span></td>
+        <td class="num">31,308</td>
+      </tr><tr>
+        <td><span class="rank">4</span></td>
+        <td><div class="pname" title="欧诗漫珍珠白水乳套装">欧诗漫珍珠白水乳套装</div><div class="shop">欧诗漫官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:38.177213425832996%"></div><span>9,642,980</span></td>
+        <td class="num">15,305</td>
+      </tr><tr>
+        <td><span class="rank">5</span></td>
+        <td><div class="pname" title="薇诺娜舒缓修护套装 敏感肌">薇诺娜舒缓修护套装 敏感肌</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:32.88315167149871%"></div><span>8,305,781</span></td>
+        <td class="num">15,633</td>
+      </tr><tr>
+        <td><span class="rank">6</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #8">雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #8</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:21.978860952385475%"></div><span>5,551,524</span></td>
+        <td class="num">5,943</td>
+      </tr><tr>
+        <td><span class="rank">7</span></td>
+        <td><div class="pname" title="自然堂凝时鲜颜肌活水乳套装">自然堂凝时鲜颜肌活水乳套装</div><div class="shop">自然堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:20.974865065065305%"></div><span>5,297,930</span></td>
+        <td class="num">14,619</td>
+      </tr><tr>
+        <td><span class="rank">8</span></td>
+        <td><div class="pname" title="【美妆节】兰蔻小黑瓶精华 替换装/中样 #7">【美妆节】兰蔻小黑瓶精华 替换装/中样 #7</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:20.91871756286109%"></div><span>5,283,748</span></td>
+        <td class="num">11,466</td>
+      </tr><tr>
+        <td><span class="rank">9</span></td>
+        <td><div class="pname" title="薇诺娜舒缓修护套装 敏感 替换装/中样 #10">薇诺娜舒缓修护套装 敏感 替换装/中样 #10</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:17.93560338373623%"></div><span>4,530,259</span></td>
+        <td class="num">5,698</td>
+      </tr><tr>
+        <td><span class="rank">10</span></td>
+        <td><div class="pname" title="谷雨光感白套装 美白淡斑">谷雨光感白套装 美白淡斑</div><div class="shop">谷雨官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:15.742160946407285%"></div><span>3,976,229</span></td>
+        <td class="num">13,164</td>
+      </tr><tr>
+        <td><span class="rank">11</span></td>
+        <td><div class="pname" title="自然堂凝时鲜颜肌活水乳套 替换装/中样 #18">自然堂凝时鲜颜肌活水乳套 替换装/中样 #18</div><div class="shop">自然堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:13.221790551842611%"></div><span>3,339,622</span></td>
+        <td class="num">3,426</td>
+      </tr><tr>
+        <td><span class="rank">12</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #22">雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #22</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:11.802971438887628%"></div><span>2,981,250</span></td>
+        <td class="num">4,170</td>
+      </tr><tr>
+        <td><span class="rank">13</span></td>
+        <td><div class="pname" title="珀莱雅早C晚A精华套装 替换装/中样 #9">珀莱雅早C晚A精华套装 替换装/中样 #9</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:11.601747849335291%"></div><span>2,930,424</span></td>
+        <td class="num">3,040</td>
+      </tr><tr>
+        <td><span class="rank">14</span></td>
+        <td><div class="pname" title="谷雨光感白套装 美白淡斑 替换装/中样 #20">谷雨光感白套装 美白淡斑 替换装/中样 #20</div><div class="shop">谷雨官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.868081083296019%"></div><span>2,745,111</span></td>
+        <td class="num">3,686</td>
+      </tr><tr>
+        <td><span class="rank">15</span></td>
+        <td><div class="pname" title="欧诗漫珍珠白水乳套装 替换装/中样 #12">欧诗漫珍珠白水乳套装 替换装/中样 #12</div><div class="shop">欧诗漫官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.467906409216393%"></div><span>2,644,033</span></td>
+        <td class="num">4,940</td>
+      </tr><tr>
+        <td><span class="rank">16</span></td>
+        <td><div class="pname" title="谷雨光感白套装 美白淡斑 替换装/中样 #27">谷雨光感白套装 美白淡斑 替换装/中样 #27</div><div class="shop">谷雨官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.240980550286697%"></div><span>2,586,715</span></td>
+        <td class="num">4,476</td>
+      </tr><tr>
+        <td><span class="rank">17</span></td>
+        <td><div class="pname" title="薇诺娜舒缓修护套装 敏感 替换装/中样 #31">薇诺娜舒缓修护套装 敏感 替换装/中样 #31</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.22845801824101%"></div><span>2,583,552</span></td>
+        <td class="num">3,229</td>
+      </tr><tr>
+        <td><span class="rank">18</span></td>
+        <td><div class="pname" title="【美妆节】兰蔻小黑瓶精华 替换装/中样 #21">【美妆节】兰蔻小黑瓶精华 替换装/中样 #21</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:9.345961968401095%"></div><span>2,360,647</span></td>
+        <td class="num">3,015</td>
+      </tr><tr>
+        <td><span class="rank">19</span></td>
+        <td><div class="pname" title="珀莱雅早C晚A精华套装 替换装/中样 #16">珀莱雅早C晚A精华套装 替换装/中样 #16</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.992076717235841%"></div><span>2,271,261</span></td>
+        <td class="num">3,520</td>
+      </tr><tr>
+        <td><span class="rank">20</span></td>
+        <td><div class="pname" title="自然堂凝时鲜颜肌活水乳套 替换装/中样 #11">自然堂凝时鲜颜肌活水乳套 替换装/中样 #11</div><div class="shop">自然堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.691995200025971%"></div><span>2,195,465</span></td>
+        <td class="num">2,219</td>
+      </tr><tr>
+        <td><span class="rank">21</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #15">雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #15</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.668125979127002%"></div><span>2,189,436</span></td>
+        <td class="num">9,390</td>
+      </tr><tr>
+        <td><span class="rank">22</span></td>
+        <td><div class="pname" title="珀莱雅早C晚A精华套装 替换装/中样 #23">珀莱雅早C晚A精华套装 替换装/中样 #23</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.462824549547141%"></div><span>2,137,580</span></td>
+        <td class="num">2,467</td>
+      </tr><tr>
+        <td><span class="rank">23</span></td>
+        <td><div class="pname" title="自然堂凝时鲜颜肌活水乳套 替换装/中样 #25">自然堂凝时鲜颜肌活水乳套 替换装/中样 #25</div><div class="shop">自然堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.326525715928163%"></div><span>2,103,153</span></td>
+        <td class="num">3,159</td>
+      </tr><tr>
+        <td><span class="rank">24</span></td>
+        <td><div class="pname" title="欧诗漫珍珠白水乳套装 替换装/中样 #19">欧诗漫珍珠白水乳套装 替换装/中样 #19</div><div class="shop">欧诗漫官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:7.466006452489006%"></div><span>1,885,799</span></td>
+        <td class="num">7,584</td>
+      </tr><tr>
+        <td><span class="rank">25</span></td>
+        <td><div class="pname" title="薇诺娜舒缓修护套装 敏感 替换装/中样 #24">薇诺娜舒缓修护套装 敏感 替换装/中样 #24</div><div class="shop">薇诺娜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:7.402344639243787%"></div><span>1,869,719</span></td>
+        <td class="num">2,694</td>
+      </tr><tr>
+        <td><span class="rank">26</span></td>
+        <td><div class="pname" title="欧诗漫珍珠白水乳套装 替换装/中样 #33">欧诗漫珍珠白水乳套装 替换装/中样 #33</div><div class="shop">欧诗漫官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:7.2250456975422495%"></div><span>1,824,936</span></td>
+        <td class="num">3,664</td>
+      </tr><tr>
+        <td><span class="rank">27</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #36">雅诗兰黛小棕瓶七夕限定礼 替换装/中样 #36</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.2976261032437835%"></div><span>1,590,684</span></td>
+        <td class="num">3,652</td>
+      </tr><tr>
+        <td><span class="rank">28</span></td>
+        <td><div class="pname" title="谷雨光感白套装 美白淡斑 替换装/中样 #13">谷雨光感白套装 美白淡斑 替换装/中样 #13</div><div class="shop">谷雨官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.001151296970877%"></div><span>1,515,799</span></td>
+        <td class="num">1,814</td>
+      </tr><tr>
+        <td><span class="rank">29</span></td>
+        <td><div class="pname" title="【美妆节】兰蔻小黑瓶精华 替换装/中样 #28">【美妆节】兰蔻小黑瓶精华 替换装/中样 #28</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.447808200575886%"></div><span>1,376,033</span></td>
+        <td class="num">1,572</td>
+      </tr><tr>
+        <td><span class="rank">30</span></td>
+        <td><div class="pname" title="自然堂凝时鲜颜肌活水乳套 替换装/中样 #39">自然堂凝时鲜颜肌活水乳套 替换装/中样 #39</div><div class="shop">自然堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.021709549311577%"></div><span>1,268,407</span></td>
+        <td class="num">1,507</td>
+      </tr></tbody>
+      </table></div>
+    </div><div class="board">
+      <div class="board-head" style="background:#e8842c">
+        <span>洁面</span>
+        <span class="total">GMV ¥1.44 亿 · 33 个商品</span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th style="width:36px">#</th><th>产品 / 店铺</th><th class="num">GMV</th><th class="num">销量</th></tr></thead>
+        <tbody><tr>
+        <td><span class="rank r1">1</span></td>
+        <td><div class="pname" title="芙丽芳丝净润洗面霜 氨基酸洁面">芙丽芳丝净润洗面霜 氨基酸洁面</div><div class="shop">freeplus官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:100%"></div><span>34,108,898</span></td>
+        <td class="num">36,379</td>
+      </tr><tr>
+        <td><span class="rank r2">2</span></td>
+        <td><div class="pname" title="珂润润浸保湿洁颜泡沫">珂润润浸保湿洁颜泡沫</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:63.11451340351131%"></div><span>21,527,665</span></td>
+        <td class="num">26,865</td>
+      </tr><tr>
+        <td><span class="rank r3">3</span></td>
+        <td><div class="pname" title="珂润润浸保湿洁颜泡沫 替换装/中样 #9">珂润润浸保湿洁颜泡沫 替换装/中样 #9</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:21.04288740140476%"></div><span>7,177,497</span></td>
+        <td class="num">15,975</td>
+      </tr><tr>
+        <td><span class="rank">4</span></td>
+        <td><div class="pname" title="EltaMD氨基酸泡沫洁面 207ml">EltaMD氨基酸泡沫洁面 207ml</div><div class="shop">eltamd海外旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:16.278590999920315%"></div><span>5,552,448</span></td>
+        <td class="num">11,796</td>
+      </tr><tr>
+        <td><span class="rank">5</span></td>
+        <td><div class="pname" title="CeraVe适乐肤修护保湿洁面">CeraVe适乐肤修护保湿洁面</div><div class="shop">cerave官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:15.809212012654294%"></div><span>5,392,348</span></td>
+        <td class="num">12,478</td>
+      </tr><tr>
+        <td><span class="rank">6</span></td>
+        <td><div class="pname" title="IPSA茵芙莎黏土按摩面膜洁面">IPSA茵芙莎黏土按摩面膜洁面</div><div class="shop">ipsa官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:15.490822951829166%"></div><span>5,283,749</span></td>
+        <td class="num">5,543</td>
+      </tr><tr>
+        <td><span class="rank">7</span></td>
+        <td><div class="pname" title="珂润润浸保湿洁颜泡沫 替换装/中样 #17">珂润润浸保湿洁颜泡沫 替换装/中样 #17</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:15.150102474726681%"></div><span>5,167,533</span></td>
+        <td class="num">5,547</td>
+      </tr><tr>
+        <td><span class="rank">8</span></td>
+        <td><div class="pname" title="旁氏米粹润泽洗面奶">旁氏米粹润泽洗面奶</div><div class="shop">旁氏官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:14.470555454474079%"></div><span>4,935,747</span></td>
+        <td class="num">9,325</td>
+      </tr><tr>
+        <td><span class="rank">9</span></td>
+        <td><div class="pname" title="旁氏米粹润泽洗面奶 替换装/中样 #11">旁氏米粹润泽洗面奶 替换装/中样 #11</div><div class="shop">旁氏官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:14.146906769019626%"></div><span>4,825,354</span></td>
+        <td class="num">28,652</td>
+      </tr><tr>
+        <td><span class="rank">10</span></td>
+        <td><div class="pname" title="至本舒颜修护洁面乳">至本舒颜修护洁面乳</div><div class="shop">至本官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:13.273357585460543%"></div><span>4,527,396</span></td>
+        <td class="num">9,360</td>
+      </tr><tr>
+        <td><span class="rank">11</span></td>
+        <td><div class="pname" title="兰蔻清滢洁面摩丝 替换装/中样 #15">兰蔻清滢洁面摩丝 替换装/中样 #15</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:11.61575492705745%"></div><span>3,962,006</span></td>
+        <td class="num">7,345</td>
+      </tr><tr>
+        <td><span class="rank">12</span></td>
+        <td><div class="pname" title="芙丽芳丝净润洗面霜 氨基 替换装/中样 #8">芙丽芳丝净润洗面霜 氨基 替换装/中样 #8</div><div class="shop">freeplus官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.145003805165445%"></div><span>3,460,349</span></td>
+        <td class="num">7,128</td>
+      </tr><tr>
+        <td><span class="rank">13</span></td>
+        <td><div class="pname" title="芙丽芳丝净润洗面霜 氨基 替换装/中样 #24">芙丽芳丝净润洗面霜 氨基 替换装/中样 #24</div><div class="shop">freeplus官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:9.03732509915741%"></div><span>3,082,532</span></td>
+        <td class="num">13,790</td>
+      </tr><tr>
+        <td><span class="rank">14</span></td>
+        <td><div class="pname" title="珂润润浸保湿洁颜泡沫 替换装/中样 #25">珂润润浸保湿洁颜泡沫 替换装/中样 #25</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.784062739288734%"></div><span>2,996,147</span></td>
+        <td class="num">19,331</td>
+      </tr><tr>
+        <td><span class="rank">15</span></td>
+        <td><div class="pname" title="芙丽芳丝净润洗面霜 氨基 替换装/中样 #16">芙丽芳丝净润洗面霜 氨基 替换装/中样 #16</div><div class="shop">freeplus官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.618021021963242%"></div><span>2,939,512</span></td>
+        <td class="num">4,866</td>
+      </tr><tr>
+        <td><span class="rank">16</span></td>
+        <td><div class="pname" title="至本舒颜修护洁面乳 替换装/中样 #12">至本舒颜修护洁面乳 替换装/中样 #12</div><div class="shop">至本官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.163295102644478%"></div><span>2,784,410</span></td>
+        <td class="num">3,100</td>
+      </tr><tr>
+        <td><span class="rank">17</span></td>
+        <td><div class="pname" title="芙丽芳丝净润洗面霜 氨基 替换装/中样 #32">芙丽芳丝净润洗面霜 氨基 替换装/中样 #32</div><div class="shop">freeplus官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.848189583844075%"></div><span>2,335,842</span></td>
+        <td class="num">4,835</td>
+      </tr><tr>
+        <td><span class="rank">18</span></td>
+        <td><div class="pname" title="CeraVe适乐肤修护保 替换装/中样 #13">CeraVe适乐肤修护保 替换装/中样 #13</div><div class="shop">cerave官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.671294393621277%"></div><span>2,275,505</span></td>
+        <td class="num">8,043</td>
+      </tr><tr>
+        <td><span class="rank">19</span></td>
+        <td><div class="pname" title="IPSA茵芙莎黏土按摩面 替换装/中样 #14">IPSA茵芙莎黏土按摩面 替换装/中样 #14</div><div class="shop">ipsa官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.518407601441711%"></div><span>2,223,357</span></td>
+        <td class="num">2,691</td>
+      </tr><tr>
+        <td><span class="rank">20</span></td>
+        <td><div class="pname" title="EltaMD氨基酸泡沫洁 替换装/中样 #26">EltaMD氨基酸泡沫洁 替换装/中样 #26</div><div class="shop">eltamd海外旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.722521437074865%"></div><span>1,951,889</span></td>
+        <td class="num">2,401</td>
+      </tr><tr>
+        <td><span class="rank">21</span></td>
+        <td><div class="pname" title="至本舒颜修护洁面乳 替换装/中样 #28">至本舒颜修护洁面乳 替换装/中样 #28</div><div class="shop">至本官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.55350982022345%"></div><span>1,894,241</span></td>
+        <td class="num">3,299</td>
+      </tr><tr>
+        <td><span class="rank">22</span></td>
+        <td><div class="pname" title="IPSA茵芙莎黏土按摩面 替换装/中样 #30">IPSA茵芙莎黏土按摩面 替换装/中样 #30</div><div class="shop">ipsa官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.486210665615758%"></div><span>1,871,286</span></td>
+        <td class="num">2,680</td>
+      </tr><tr>
+        <td><span class="rank">23</span></td>
+        <td><div class="pname" title="旁氏米粹润泽洗面奶 替换装/中样 #27">旁氏米粹润泽洗面奶 替换装/中样 #27</div><div class="shop">旁氏官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.015028629772794%"></div><span>1,710,571</span></td>
+        <td class="num">3,368</td>
+      </tr><tr>
+        <td><span class="rank">24</span></td>
+        <td><div class="pname" title="珂润润浸保湿洁颜泡沫 替换装/中样 #33">珂润润浸保湿洁颜泡沫 替换装/中样 #33</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.816649309514485%"></div><span>1,642,906</span></td>
+        <td class="num">2,808</td>
+      </tr><tr>
+        <td><span class="rank">25</span></td>
+        <td><div class="pname" title="兰蔻清滢洁面摩丝 替换装/中样 #39">兰蔻清滢洁面摩丝 替换装/中样 #39</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.06547874985583%"></div><span>1,386,690</span></td>
+        <td class="num">3,221</td>
+      </tr><tr>
+        <td><span class="rank">26</span></td>
+        <td><div class="pname" title="CeraVe适乐肤修护保 替换装/中样 #29">CeraVe适乐肤修护保 替换装/中样 #29</div><div class="shop">cerave官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.992401044443007%"></div><span>1,361,764</span></td>
+        <td class="num">1,782</td>
+      </tr><tr>
+        <td><span class="rank">27</span></td>
+        <td><div class="pname" title="至本舒颜修护洁面乳 替换装/中样 #36">至本舒颜修护洁面乳 替换装/中样 #36</div><div class="shop">至本官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.884827941377643%"></div><span>1,325,072</span></td>
+        <td class="num">1,753</td>
+      </tr><tr>
+        <td><span class="rank">28</span></td>
+        <td><div class="pname" title="兰蔻清滢洁面摩丝 替换装/中样 #31">兰蔻清滢洁面摩丝 替换装/中样 #31</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.8564218638784515%"></div><span>1,315,383</span></td>
+        <td class="num">1,422</td>
+      </tr><tr>
+        <td><span class="rank">29</span></td>
+        <td><div class="pname" title="IPSA茵芙莎黏土按摩面 替换装/中样 #38">IPSA茵芙莎黏土按摩面 替换装/中样 #38</div><div class="shop">ipsa官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.697785838756796%"></div><span>1,261,274</span></td>
+        <td class="num">1,328</td>
+      </tr><tr>
+        <td><span class="rank">30</span></td>
+        <td><div class="pname" title="兰蔻清滢洁面摩丝 替换装/中样 #23">兰蔻清滢洁面摩丝 替换装/中样 #23</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.307075473385273%"></div><span>1,128,007</span></td>
+        <td class="num">1,411</td>
+      </tr></tbody>
+      </table></div>
+    </div><div class="board">
+      <div class="board-head" style="background:#d9a916">
+        <span>眼霜</span>
+        <span class="total">GMV ¥1.38 亿 · 33 个商品</span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th style="width:36px">#</th><th>产品 / 店铺</th><th class="num">GMV</th><th class="num">销量</th></tr></thead>
+        <tbody><tr>
+        <td><span class="rank r1">1</span></td>
+        <td><div class="pname" title="欧莱雅紫熨斗眼霜 30ml 大容量">欧莱雅紫熨斗眼霜 30ml 大容量</div><div class="shop">欧莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:100%"></div><span>29,725,606</span></td>
+        <td class="num">64,859</td>
+      </tr><tr>
+        <td><span class="rank r2">2</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶眼霜 抗蓝光">雅诗兰黛小棕瓶眼霜 抗蓝光</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:46.22567156410537%"></div><span>13,740,861</span></td>
+        <td class="num">18,406</td>
+      </tr><tr>
+        <td><span class="rank r3">3</span></td>
+        <td><div class="pname" title="AHC黄金蜂胶眼霜">AHC黄金蜂胶眼霜</div><div class="shop">AHC海外旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:39.49397028272527%"></div><span>11,739,822</span></td>
+        <td class="num">19,640</td>
+      </tr><tr>
+        <td><span class="rank">4</span></td>
+        <td><div class="pname" title="丸美小红笔眼霜 第二代">丸美小红笔眼霜 第二代</div><div class="shop">丸美官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:34.3338568101858%"></div><span>10,205,947</span></td>
+        <td class="num">48,643</td>
+      </tr><tr>
+        <td><span class="rank">5</span></td>
+        <td><div class="pname" title="资生堂悦薇眼霜 抗皱紧致">资生堂悦薇眼霜 抗皱紧致</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:32.93326299218256%"></div><span>9,789,612</span></td>
+        <td class="num">17,522</td>
+      </tr><tr>
+        <td><span class="rank">6</span></td>
+        <td><div class="pname" title="兰蔻小黑瓶发光眼霜 20 替换装/中样 #9">兰蔻小黑瓶发光眼霜 20 替换装/中样 #9</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:20.12929862556881%"></div><span>5,983,556</span></td>
+        <td class="num">31,688</td>
+      </tr><tr>
+        <td><span class="rank">7</span></td>
+        <td><div class="pname" title="欧莱雅紫熨斗眼霜 30m 替换装/中样 #7">欧莱雅紫熨斗眼霜 30m 替换装/中样 #7</div><div class="shop">欧莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:19.359840805263985%"></div><span>5,754,830</span></td>
+        <td class="num">24,843</td>
+      </tr><tr>
+        <td><span class="rank">8</span></td>
+        <td><div class="pname" title="AHC黄金蜂胶眼霜 替换装/中样 #12">AHC黄金蜂胶眼霜 替换装/中样 #12</div><div class="shop">AHC海外旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:12.586979723811181%"></div><span>3,741,556</span></td>
+        <td class="num">11,413</td>
+      </tr><tr>
+        <td><span class="rank">9</span></td>
+        <td><div class="pname" title="珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #10">珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #10</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:11.301263294682705%"></div><span>3,359,369</span></td>
+        <td class="num">3,538</td>
+      </tr><tr>
+        <td><span class="rank">10</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶眼霜 抗蓝 替换装/中样 #15">雅诗兰黛小棕瓶眼霜 抗蓝 替换装/中样 #15</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.782801198401136%"></div><span>3,205,253</span></td>
+        <td class="num">3,825</td>
+      </tr><tr>
+        <td><span class="rank">11</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶眼霜 抗蓝 替换装/中样 #8">雅诗兰黛小棕瓶眼霜 抗蓝 替换装/中样 #8</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.473270082366025%"></div><span>3,113,243</span></td>
+        <td class="num">10,237</td>
+      </tr><tr>
+        <td><span class="rank">12</span></td>
+        <td><div class="pname" title="珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #17">珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #17</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.964819758426454%"></div><span>2,664,847</span></td>
+        <td class="num">5,631</td>
+      </tr><tr>
+        <td><span class="rank">13</span></td>
+        <td><div class="pname" title="AHC黄金蜂胶眼霜 替换装/中样 #26">AHC黄金蜂胶眼霜 替换装/中样 #26</div><div class="shop">AHC海外旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.931686708085952%"></div><span>2,654,998</span></td>
+        <td class="num">3,018</td>
+      </tr><tr>
+        <td><span class="rank">14</span></td>
+        <td><div class="pname" title="兰蔻小黑瓶发光眼霜 20 替换装/中样 #16">兰蔻小黑瓶发光眼霜 20 替换装/中样 #16</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.24040391304386%"></div><span>2,449,510</span></td>
+        <td class="num">5,698</td>
+      </tr><tr>
+        <td><span class="rank">15</span></td>
+        <td><div class="pname" title="珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #31">珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #31</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.233285471118739%"></div><span>2,447,394</span></td>
+        <td class="num">9,409</td>
+      </tr><tr>
+        <td><span class="rank">16</span></td>
+        <td><div class="pname" title="雅诗兰黛小棕瓶眼霜 抗蓝 替换装/中样 #22">雅诗兰黛小棕瓶眼霜 抗蓝 替换装/中样 #22</div><div class="shop">雅诗兰黛官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.084215339461878%"></div><span>2,403,082</span></td>
+        <td class="num">6,037</td>
+      </tr><tr>
+        <td><span class="rank">17</span></td>
+        <td><div class="pname" title="丸美小红笔眼霜 第二代 替换装/中样 #11">丸美小红笔眼霜 第二代 替换装/中样 #11</div><div class="shop">丸美官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.008068868301626%"></div><span>2,380,447</span></td>
+        <td class="num">2,586</td>
+      </tr><tr>
+        <td><span class="rank">18</span></td>
+        <td><div class="pname" title="珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #38">珀莱雅红宝石眼霜 淡纹紧 替换装/中样 #38</div><div class="shop">珀莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:7.0202975845135%"></div><span>2,086,826</span></td>
+        <td class="num">5,558</td>
+      </tr><tr>
+        <td><span class="rank">19</span></td>
+        <td><div class="pname" title="欧莱雅紫熨斗眼霜 30m 替换装/中样 #28">欧莱雅紫熨斗眼霜 30m 替换装/中样 #28</div><div class="shop">欧莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.992604288706511%"></div><span>2,078,594</span></td>
+        <td class="num">2,389</td>
+      </tr><tr>
+        <td><span class="rank">20</span></td>
+        <td><div class="pname" title="资生堂悦薇眼霜 抗皱紧致 替换装/中样 #20">资生堂悦薇眼霜 抗皱紧致 替换装/中样 #20</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.495743097718512%"></div><span>1,930,899</span></td>
+        <td class="num">4,359</td>
+      </tr><tr>
+        <td><span class="rank">21</span></td>
+        <td><div class="pname" title="资生堂悦薇眼霜 抗皱紧致 替换装/中样 #13">资生堂悦薇眼霜 抗皱紧致 替换装/中样 #13</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.196660885567817%"></div><span>1,841,995</span></td>
+        <td class="num">2,321</td>
+      </tr><tr>
+        <td><span class="rank">22</span></td>
+        <td><div class="pname" title="丸美小红笔眼霜 第二代 替换装/中样 #18">丸美小红笔眼霜 第二代 替换装/中样 #18</div><div class="shop">丸美官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.008553702824427%"></div><span>1,786,079</span></td>
+        <td class="num">2,064</td>
+      </tr><tr>
+        <td><span class="rank">23</span></td>
+        <td><div class="pname" title="资生堂悦薇眼霜 抗皱紧致 替换装/中样 #27">资生堂悦薇眼霜 抗皱紧致 替换装/中样 #27</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.545720413572056%"></div><span>1,648,499</span></td>
+        <td class="num">2,685</td>
+      </tr><tr>
+        <td><span class="rank">24</span></td>
+        <td><div class="pname" title="欧莱雅紫熨斗眼霜 30m 替换装/中样 #35">欧莱雅紫熨斗眼霜 30m 替换装/中样 #35</div><div class="shop">欧莱雅官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.235997543666562%"></div><span>1,556,432</span></td>
+        <td class="num">4,846</td>
+      </tr><tr>
+        <td><span class="rank">25</span></td>
+        <td><div class="pname" title="丸美小红笔眼霜 第二代 替换装/中样 #39">丸美小红笔眼霜 第二代 替换装/中样 #39</div><div class="shop">丸美官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.133866741017829%"></div><span>1,526,073</span></td>
+        <td class="num">1,940</td>
+      </tr><tr>
+        <td><span class="rank">26</span></td>
+        <td><div class="pname" title="兰蔻小黑瓶发光眼霜 20 替换装/中样 #23">兰蔻小黑瓶发光眼霜 20 替换装/中样 #23</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.984951358098469%"></div><span>1,481,807</span></td>
+        <td class="num">2,971</td>
+      </tr><tr>
+        <td><span class="rank">27</span></td>
+        <td><div class="pname" title="AHC黄金蜂胶眼霜 替换装/中样 #19">AHC黄金蜂胶眼霜 替换装/中样 #19</div><div class="shop">AHC海外旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.286176705699456%"></div><span>1,274,092</span></td>
+        <td class="num">4,844</td>
+      </tr><tr>
+        <td><span class="rank">28</span></td>
+        <td><div class="pname" title="资生堂悦薇眼霜 抗皱紧致 替换装/中样 #34">资生堂悦薇眼霜 抗皱紧致 替换装/中样 #34</div><div class="shop">资生堂官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.4508329283514017%"></div><span>1,025,781</span></td>
+        <td class="num">3,098</td>
+      </tr><tr>
+        <td><span class="rank">29</span></td>
+        <td><div class="pname" title="AHC黄金蜂胶眼霜 替换装/中样 #33">AHC黄金蜂胶眼霜 替换装/中样 #33</div><div class="shop">AHC海外旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.3353096317027147%"></div><span>991,441</span></td>
+        <td class="num">1,782</td>
+      </tr><tr>
+        <td><span class="rank">30</span></td>
+        <td><div class="pname" title="丸美小红笔眼霜 第二代 替换装/中样 #25">丸美小红笔眼霜 第二代 替换装/中样 #25</div><div class="shop">丸美官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:2.970805708721296%"></div><span>883,090</span></td>
+        <td class="num">3,815</td>
+      </tr></tbody>
+      </table></div>
+    </div><div class="board">
+      <div class="board-head" style="background:#7b52ab">
+        <span>乳液/面霜</span>
+        <span class="total">GMV ¥1.36 亿 · 34 个商品</span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th style="width:36px">#</th><th>产品 / 店铺</th><th class="num">GMV</th><th class="num">销量</th></tr></thead>
+        <tbody><tr>
+        <td><span class="rank r1">1</span></td>
+        <td><div class="pname" title="珂润润浸保湿滋养乳霜">珂润润浸保湿滋养乳霜</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:100%"></div><span>38,279,765</span></td>
+        <td class="num">71,162</td>
+      </tr><tr>
+        <td><span class="rank r2">2</span></td>
+        <td><div class="pname" title="玉泽皮肤屏障修护保湿霜">玉泽皮肤屏障修护保湿霜</div><div class="shop">玉泽官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:27.607632909972146%"></div><span>10,568,137</span></td>
+        <td class="num">12,269</td>
+      </tr><tr>
+        <td><span class="rank r3">3</span></td>
+        <td><div class="pname" title="优时颜黑引力面霜2.0">优时颜黑引力面霜2.0</div><div class="shop">优时颜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:23.651401726212267%"></div><span>9,053,701</span></td>
+        <td class="num">9,214</td>
+      </tr><tr>
+        <td><span class="rank">4</span></td>
+        <td><div class="pname" title="海蓝之谜精华面霜 60ml">海蓝之谜精华面霜 60ml</div><div class="shop">lamer海蓝之谜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:19.835996903324773%"></div><span>7,593,173</span></td>
+        <td class="num">9,020</td>
+      </tr><tr>
+        <td><span class="rank">5</span></td>
+        <td><div class="pname" title="HBN熊果苷透亮水乳套装">HBN熊果苷透亮水乳套装</div><div class="shop">HBN官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:18.141493292866347%"></div><span>6,944,521</span></td>
+        <td class="num">7,116</td>
+      </tr><tr>
+        <td><span class="rank">6</span></td>
+        <td><div class="pname" title="优时颜黑引力面霜2.0 替换装/中样 #11">优时颜黑引力面霜2.0 替换装/中样 #11</div><div class="shop">优时颜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:10.34807815565221%"></div><span>3,961,220</span></td>
+        <td class="num">9,991</td>
+      </tr><tr>
+        <td><span class="rank">7</span></td>
+        <td><div class="pname" title="兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #10">兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #10</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:9.941239189948005%"></div><span>3,805,483</span></td>
+        <td class="num">14,831</td>
+      </tr><tr>
+        <td><span class="rank">8</span></td>
+        <td><div class="pname" title="珂润润浸保湿滋养乳霜 替换装/中样 #8">珂润润浸保湿滋养乳霜 替换装/中样 #8</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:9.828801195618626%"></div><span>3,762,442</span></td>
+        <td class="num">12,598</td>
+      </tr><tr>
+        <td><span class="rank">9</span></td>
+        <td><div class="pname" title="科颜氏高保湿面霜 125 替换装/中样 #9">科颜氏高保湿面霜 125 替换装/中样 #9</div><div class="shop">科颜氏官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:9.737836687346435%"></div><span>3,727,621</span></td>
+        <td class="num">3,880</td>
+      </tr><tr>
+        <td><span class="rank">10</span></td>
+        <td><div class="pname" title="AOEO山茶花保湿面霜 替换装/中样 #15">AOEO山茶花保湿面霜 替换装/中样 #15</div><div class="shop">AOEO官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:9.401823652783657%"></div><span>3,598,996</span></td>
+        <td class="num">5,274</td>
+      </tr><tr>
+        <td><span class="rank">11</span></td>
+        <td><div class="pname" title="玉泽皮肤屏障修护保湿霜 替换装/中样 #13">玉泽皮肤屏障修护保湿霜 替换装/中样 #13</div><div class="shop">玉泽官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.83620105818309%"></div><span>3,382,477</span></td>
+        <td class="num">11,594</td>
+      </tr><tr>
+        <td><span class="rank">12</span></td>
+        <td><div class="pname" title="HBN熊果苷透亮水乳套装 替换装/中样 #12">HBN熊果苷透亮水乳套装 替换装/中样 #12</div><div class="shop">HBN官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.533895127099136%"></div><span>3,266,755</span></td>
+        <td class="num">3,462</td>
+      </tr><tr>
+        <td><span class="rank">13</span></td>
+        <td><div class="pname" title="优时颜黑引力面霜2.0 替换装/中样 #19">优时颜黑引力面霜2.0 替换装/中样 #19</div><div class="shop">优时颜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:8.495237627503721%"></div><span>3,251,957</span></td>
+        <td class="num">14,181</td>
+      </tr><tr>
+        <td><span class="rank">14</span></td>
+        <td><div class="pname" title="珂润润浸保湿滋养乳霜 替换装/中样 #16">珂润润浸保湿滋养乳霜 替换装/中样 #16</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:7.794773557256686%"></div><span>2,983,821</span></td>
+        <td class="num">3,294</td>
+      </tr><tr>
+        <td><span class="rank">15</span></td>
+        <td><div class="pname" title="科颜氏高保湿面霜 125 替换装/中样 #33">科颜氏高保湿面霜 125 替换装/中样 #33</div><div class="shop">科颜氏官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:7.380264743004561%"></div><span>2,825,148</span></td>
+        <td class="num">7,359</td>
+      </tr><tr>
+        <td><span class="rank">16</span></td>
+        <td><div class="pname" title="AOEO山茶花保湿面霜">AOEO山茶花保湿面霜</div><div class="shop">AOEO官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.908501136305303%"></div><span>2,644,558</span></td>
+        <td class="num">4,110</td>
+      </tr><tr>
+        <td><span class="rank">17</span></td>
+        <td><div class="pname" title="HBN熊果苷透亮水乳套装 替换装/中样 #20">HBN熊果苷透亮水乳套装 替换装/中样 #20</div><div class="shop">HBN官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:6.2583168940561675%"></div><span>2,395,669</span></td>
+        <td class="num">6,841</td>
+      </tr><tr>
+        <td><span class="rank">18</span></td>
+        <td><div class="pname" title="HBN熊果苷透亮水乳套装 替换装/中样 #28">HBN熊果苷透亮水乳套装 替换装/中样 #28</div><div class="shop">HBN官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.972069055282863%"></div><span>2,286,094</span></td>
+        <td class="num">7,490</td>
+      </tr><tr>
+        <td><span class="rank">19</span></td>
+        <td><div class="pname" title="珂润润浸保湿滋养乳霜 替换装/中样 #24">珂润润浸保湿滋养乳霜 替换装/中样 #24</div><div class="shop">珂润官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.832679484840098%"></div><span>2,232,736</span></td>
+        <td class="num">6,253</td>
+      </tr><tr>
+        <td><span class="rank">20</span></td>
+        <td><div class="pname" title="玉泽皮肤屏障修护保湿霜 替换装/中样 #29">玉泽皮肤屏障修护保湿霜 替换装/中样 #29</div><div class="shop">玉泽官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:5.757895849151634%"></div><span>2,204,109</span></td>
+        <td class="num">6,554</td>
+      </tr><tr>
+        <td><span class="rank">21</span></td>
+        <td><div class="pname" title="AOEO山茶花保湿面霜 替换装/中样 #39">AOEO山茶花保湿面霜 替换装/中样 #39</div><div class="shop">AOEO官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.6738975539687875%"></div><span>1,789,157</span></td>
+        <td class="num">2,007</td>
+      </tr><tr>
+        <td><span class="rank">22</span></td>
+        <td><div class="pname" title="科颜氏高保湿面霜 125 替换装/中样 #17">科颜氏高保湿面霜 125 替换装/中样 #17</div><div class="shop">科颜氏官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.3987913718906055%"></div><span>1,683,847</span></td>
+        <td class="num">2,210</td>
+      </tr><tr>
+        <td><span class="rank">23</span></td>
+        <td><div class="pname" title="海蓝之谜精华面霜 60m 替换装/中样 #22">海蓝之谜精华面霜 60m 替换装/中样 #22</div><div class="shop">lamer海蓝之谜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:4.152381813211236%"></div><span>1,589,522</span></td>
+        <td class="num">2,676</td>
+      </tr><tr>
+        <td><span class="rank">24</span></td>
+        <td><div class="pname" title="兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #18">兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #18</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.7160572955450486%"></div><span>1,422,498</span></td>
+        <td class="num">1,926</td>
+      </tr><tr>
+        <td><span class="rank">25</span></td>
+        <td><div class="pname" title="海蓝之谜精华面霜 60m 替换装/中样 #30">海蓝之谜精华面霜 60m 替换装/中样 #30</div><div class="shop">lamer海蓝之谜官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.5395645715170927%"></div><span>1,354,937</span></td>
+        <td class="num">7,912</td>
+      </tr><tr>
+        <td><span class="rank">26</span></td>
+        <td><div class="pname" title="AOEO山茶花保湿面霜 替换装/中样 #31">AOEO山茶花保湿面霜 替换装/中样 #31</div><div class="shop">AOEO官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.483709996652278%"></div><span>1,333,556</span></td>
+        <td class="num">6,703</td>
+      </tr><tr>
+        <td><span class="rank">27</span></td>
+        <td><div class="pname" title="兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #26">兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #26</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.476476409925714%"></div><span>1,330,787</span></td>
+        <td class="num">6,081</td>
+      </tr><tr>
+        <td><span class="rank">28</span></td>
+        <td><div class="pname" title="玉泽皮肤屏障修护保湿霜 替换装/中样 #21">玉泽皮肤屏障修护保湿霜 替换装/中样 #21</div><div class="shop">玉泽官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.4758598962140965%"></div><span>1,330,551</span></td>
+        <td class="num">6,053</td>
+      </tr><tr>
+        <td><span class="rank">29</span></td>
+        <td><div class="pname" title="科颜氏高保湿面霜 125 替换装/中样 #25">科颜氏高保湿面霜 125 替换装/中样 #25</div><div class="shop">科颜氏官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.4059273874852676%"></div><span>1,303,781</span></td>
+        <td class="num">2,851</td>
+      </tr><tr>
+        <td><span class="rank">30</span></td>
+        <td><div class="pname" title="兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #34">兰蔻小黑瓶发光眼霜+面霜 替换装/中样 #34</div><div class="shop">lancome兰蔻官方旗舰店</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:3.1419001657925536%"></div><span>1,202,712</span></td>
+        <td class="num">4,059</td>
+      </tr></tbody>
+      </table></div>
+    </div></div>
+<div class="hint" style="margin-top:10px">💡 直接上传「【Y26】直播间宝贝排行」整份 xlsx 即可——会自动找到该 sheet、识别6个品类分块、把月份下填到每个产品行并跳过合计行。也兼容普通扁平表（含 品类/产品/店铺/GMV/销量/月份 列）。品类板块可横向滚动；可拖拽文件到页面上传。</div>
+
+<div class="modal-mask" id="mapModal" style="top: 48px;">
+  <div class="modal">
+    <h3>字段映射</h3>
+    <div class="desc">未能完全自动识别列名，请确认下面各字段对应底表的哪一列：</div>
+    <div id="mapRows"></div>
+    <div class="foot">
+      <button class="btn" onclick="closeModal()">取消</button>
+      <button class="btn primary" onclick="applyMapping()">确认</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= 全局状态 ================= */
+let rawRows = [];            // {cat, name, shop, gmv, qty, ym}
+let months = [];             // 排序后的 yyyy-mm 列表
+let granularity = 'month';
+let pendingHeaders = null, pendingData = null;
+
+const CAT_COLORS = ['#2f5fd0','#5aa14a','#e8842c','#d9a916','#7b52ab','#c2504f','#2f9e8f','#8a6d3b'];
+
+/* ================= 列名自动识别 ================= */
+const FIELD_DEFS = [
+  {key:'cat',  label:'品类',   pats:[/品类/,/类目/,/category/i]},
+  {key:'name', label:'产品名称', pats:[/产品/,/商品/,/宝贝/,/名称/,/product/i,/title/i]},
+  {key:'shop', label:'店铺',   pats:[/店铺/,/店名/,/shop/i,/store/i]},
+  {key:'gmv',  label:'GMV',   pats:[/gmv/i,/销售额/,/成交额/,/金额/]},
+  {key:'qty',  label:'销量',   pats:[/销量/,/件数/,/数量/,/qty/i,/sales?_?(count|num)/i]},
+  {key:'ym',   label:'月份',   pats:[/月份/,/月度/,/^月$/,/时间/,/日期/,/month/i,/date/i]},
+];
+
+function autoMap(headers){
+  const map = {};
+  for(const f of FIELD_DEFS){
+    const hit = headers.find(h => f.pats.some(p => p.test(String(h).trim())));
+    if(hit) map[f.key] = hit;
+  }
+  return map;
+}
+
+/* ================= 文件解析 ================= */
+/* ================= 多分块「宝贝排行」表结构识别与扁平化 ================= */
+function findRankSheet(wb){
+  // 优先按名称
+  const byName = wb.SheetNames.find(n => /宝贝排行|直播间/.test(n));
+  if(byName) return {name:byName, sheet:wb.Sheets[byName]};
+  // 否则按表头特征打分
+  let best=null, bestScore=-1;
+  for(const n of wb.SheetNames){
+    const aoa = XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, defval:''});
+    let score=0;
+    for(let r=0;r<Math.min(5,aoa.length);r++){
+      const row=aoa[r]||[];
+      if(row.some(c=>/月份/.test(String(c)))) score++;
+      if(row.some(c=>/产品|商品|宝贝/.test(String(c)))) score++;
+      if(row.some(c=>/GMV|销售额|成交额/i.test(String(c)))) score++;
+    }
+    if(score>bestScore){ bestScore=score; best={name:n, sheet:wb.Sheets[n]}; }
+  }
+  return best;
+}
+
+function flattenRankSheet(sheet){
+  const aoa = XLSX.utils.sheet_to_json(sheet, {header:1, defval:'', cellDates:true});
+  if(!aoa.length) return null;
+  // 定位表头行（同时含 月份/产品/GMV）
+  let hrow=-1;
+  for(let r=0;r<Math.min(8,aoa.length);r++){
+    const row=aoa[r]||[];
+    if(row.some(c=>/月份/.test(String(c)))
+       && row.some(c=>/产品|商品|宝贝/.test(String(c)))
+       && row.some(c=>/GMV|销售额|成交额|金额/i.test(String(c)))){
+      hrow=r; break;
+    }
+  }
+  if(hrow<0) return null;
+  const header = aoa[hrow];
+  // 分块起始列 = 表头为「月份」的位置
+  const starts=[];
+  header.forEach((c,i)=>{ if(/月份/.test(String(c).trim())) starts.push(i); });
+  if(!starts.length) return null;
+  // 用首个分块确定各字段相对偏移
+  const firstEnd = starts[1] || header.length;
+  const off={};
+  for(let i=starts[0]; i<firstEnd; i++){
+    const h=String(header[i]).trim();
+    if(/月份/.test(h)) off.ym=i;
+    else if(/店铺|店名/.test(h)) off.shop=i;
+    else if(/分类|类目/.test(h)) off.cat=i;
+    else if((/产品|商品|名称/.test(h)) || (/宝贝/.test(h) && !/图片/.test(h))) off.name=i;
+    else if(/GMV|销售额|成交额|金额/i.test(h)) off.gmv=i;
+    else if(/销量|件数|数量/.test(h)) off.qty=i;
+  }
+  if(off.ym==null || off.name==null || off.gmv==null) return null;
+  const rel = {ym:off.ym-starts[0], shop:off.shop!=null?off.shop-starts[0]:null, cat:off.cat!=null?off.cat-starts[0]:null, name:off.name-starts[0], gmv:off.gmv-starts[0], qty:off.qty!=null?off.qty-starts[0]:null};
+  const catRow = aoa[hrow-1] || [];
+  const rows=[];
+  for(const s of starts){
+    let curMonth=null;
+    let catLabel = catRow[s] ? String(catRow[s]).trim() : '';
+    for(let r=hrow+1; r<aoa.length; r++){
+      const row=aoa[r]||[];
+      const ymVal = row[s+rel.ym];
+      const ym = normYM(ymVal);
+      if(ym) curMonth=ym;                       // 合计行带月份 → 记录当前月
+      const nameVal = row[s+rel.name];
+      if(nameVal==null || String(nameVal).trim()==='') continue;
+      if(/合计/.test(String(nameVal))) continue; // 跳过合计行
+      if(!curMonth) continue;
+      let cat = catLabel;
+      if(!cat && rel.cat!=null){
+        const cf=row[s+rel.cat];
+        cat = cf ? String(cf).split('>>')[0].trim() : ('品类'+s);
+      }
+      rows.push({
+        cat: cat || ('品类'+s),
+        name: String(nameVal).trim(),
+        ym: curMonth,
+        shop: rel.shop!=null ? String(row[s+rel.shop] ?? '').trim() : '',
+        gmv: normNum(row[s+rel.gmv]),
+        qty: rel.qty!=null ? normNum(row[s+rel.qty]) : 0,
+      });
+    }
+  }
+  return rows;
+}
+
+function handleFile(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try{
+      const wb = XLSX.read(e.target.result, {type:'array', cellDates:true});
+      // 1) 先尝试「宝贝排行」多分块结构
+      const rs = findRankSheet(wb);
+      if(rs){
+        const flat = flattenRankSheet(rs.sheet);
+        if(flat && flat.length){
+          rawRows = flat;
+          document.getElementById('dataTag').textContent = file.name + ' · ' + flat.length + ' 行（已自动扁平化）';
+          rebuildFilters(); render();
+          return;
+        }
+      }
+      // 2) 回退：按通用扁平表解析（选行数最多的 sheet）
+      let best = null, bestLen = 0;
+      wb.SheetNames.forEach(n=>{
+        const js = XLSX.utils.sheet_to_json(wb.Sheets[n], {defval:''});
+        if(js.length > bestLen){ bestLen = js.length; best = js; }
+      });
+      if(!best || !best.length){ alert('没有解析到数据，请检查文件内容'); return; }
+      const headers = Object.keys(best[0]);
+      const map = autoMap(headers);
+      const required = ['cat','name','gmv','ym'];
+      if(required.every(k=>map[k])){
+        ingest(best, map, file.name);
+      }else{
+        pendingHeaders = headers; pendingData = best;
+        openModal(headers, map);
+      }
+    }catch(err){ alert('解析失败：' + err.message); }
+  };
+  reader.readAsArrayBuffer(file);
+  document.getElementById('fileInput').value = '';
+}
+
+function openModal(headers, map){
+  const box = document.getElementById('mapRows');
+  box.innerHTML = FIELD_DEFS.map(f=>{
+    const opts = ['<option value="">（无此列）</option>'].concat(
+      headers.map(h=>`<option value="${escAttr(h)}" ${map[f.key]===h?'selected':''}>${esc(h)}</option>`)
+    ).join('');
+    const req = ['cat','name','gmv','ym'].includes(f.key) ? ' *' : '';
+    return `<div class="map-row"><label>${f.label}${req}</label><select data-key="${f.key}">${opts}</select></div>`;
+  }).join('');
+  document.getElementById('mapModal').style.display = 'flex';
+}
+function closeModal(){ document.getElementById('mapModal').style.display = 'none'; }
+function applyMapping(){
+  const map = {};
+  document.querySelectorAll('#mapRows select').forEach(s=>{ if(s.value) map[s.dataset.key] = s.value; });
+  for(const k of ['cat','name','gmv','ym']){
+    if(!map[k]){ alert('「' + FIELD_DEFS.find(f=>f.key===k).label + '」为必选字段'); return; }
+  }
+  closeModal();
+  ingest(pendingData, map, '已上传文件');
+}
+
+function normYM(v){
+  if(v == null || v === '') return null;
+  if(v instanceof Date) return v.getUTCFullYear() + '-' + String(v.getUTCMonth()+1).padStart(2,'0');
+  const s = String(v).trim();
+  // Excel 序列号日期（先判断，避免被下面的正则误匹配成"4602-03"）；用 UTC 避免时区错位
+  const n = Number(s);
+  if(!isNaN(n) && n > 20000 && n < 60000){
+    const d = new Date(Math.round((n - 25569) * 86400 * 1000));
+    return d.getUTCFullYear() + '-' + String(d.getUTCMonth()+1).padStart(2,'0');
+  }
+  let m = s.match(/(\d{4})[-/年.]?\s*(\d{1,2})/);
+  if(m){ const mo = +m[2]; if(mo>=1 && mo<=12) return m[1] + '-' + String(mo).padStart(2,'0'); }
+  return null;
+}
+function normNum(v){
+  if(typeof v === 'number') return v;
+  const n = parseFloat(String(v).replace(/[,¥￥\s]/g,''));
+  return isNaN(n) ? 0 : n;
+}
+
+function ingest(data, map, sourceName){
+  const rows = [];
+  for(const r of data){
+    const ym = normYM(r[map.ym]);
+    if(!ym) continue;
+    const cat = String(r[map.cat] ?? '').trim();
+    const name = String(r[map.name] ?? '').trim();
+    if(!cat || !name) continue;
+    rows.push({
+      cat, name, ym,
+      shop: map.shop ? String(r[map.shop] ?? '').trim() : '',
+      gmv: normNum(r[map.gmv]),
+      qty: map.qty ? normNum(r[map.qty]) : 0,
+    });
+  }
+  if(!rows.length){ alert('没有解析到有效数据行（请检查月份列格式，如 2026-01）'); return; }
+  rawRows = rows;
+  document.getElementById('dataTag').textContent = sourceName + ' · ' + rows.length + ' 行';
+  rebuildFilters();
+  render();
+}
+
+/* ================= 时间段 ================= */
+function rebuildFilters(){
+  months = [...new Set(rawRows.map(r=>r.ym))].sort();
+  const cats = [...new Set(rawRows.map(r=>r.cat))];
+  const catSel = document.getElementById('catSel');
+  catSel.innerHTML = '<option value="__all__">全部品类</option>' + cats.map(c=>`<option value="${escAttr(c)}">${esc(c)}</option>`).join('');
+  buildPeriodOptions();
+}
+
+function periodsFor(g){
+  const set = new Map(); // key -> {label, months:[]}
+  for(const ym of months){
+    const [y, m] = ym.split('-').map(Number);
+    let key, label;
+    if(g === 'month'){ key = ym; label = ym; }
+    else if(g === 'quarter'){ const q = Math.ceil(m/3); key = y + '-Q' + q; label = y + ' 年 Q' + q; }
+    else if(g === 'half'){ const h = m <= 6 ? 'H1' : 'H2'; key = y + '-' + h; label = y + ' 年' + (h==='H1'?'上半年':'下半年'); }
+    else { key = String(y); label = y + ' 全年'; }
+    if(!set.has(key)) set.set(key, {label, months:[]});
+    set.get(key).months.push(ym);
+  }
+  return [...set.entries()].sort((a,b)=>a[0]<b[0]?-1:1).map(([key,v])=>({key, ...v}));
+}
+
+function buildPeriodOptions(){
+  const g = granularity;
+  document.getElementById('periodBox').style.display = g === 'range' ? 'none' : 'flex';
+  document.getElementById('rangeBox').style.display = g === 'range' ? 'flex' : 'none';
+  if(g === 'range'){
+    const opts = months.map(m=>`<option value="${m}">${m}</option>`).join('');
+    const f = document.getElementById('rangeFrom'), t = document.getElementById('rangeTo');
+    f.innerHTML = opts; t.innerHTML = opts;
+    if(months.length){ f.value = months[0]; t.value = months[months.length-1]; }
+  }else{
+    const ps = periodsFor(g);
+    const sel = document.getElementById('periodSel');
+    sel.innerHTML = ps.map(p=>`<option value="${p.key}">${p.label}</option>`).join('');
+    if(ps.length) sel.value = ps[ps.length-1].key; // 默认最新
+  }
+}
+
+function selectedMonths(){
+  if(granularity === 'range'){
+    let f = document.getElementById('rangeFrom').value, t = document.getElementById('rangeTo').value;
+    if(f > t) [f, t] = [t, f];
+    return months.filter(m => m >= f && m <= t);
+  }
+  const ps = periodsFor(granularity);
+  const cur = ps.find(p => p.key === document.getElementById('periodSel').value);
+  return cur ? cur.months : [];
+}
+
+/* ================= 渲染 ================= */
+function fmt(n){
+  if(n >= 1e8) return (n/1e8).toFixed(2) + ' 亿';
+  if(n >= 1e4) return (n/1e4).toFixed(1) + ' 万';
+  return Math.round(n).toLocaleString();
+}
+function fmtInt(n){ return Math.round(n).toLocaleString(); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
+
+function render(){
+  const ms = selectedMonths();
+  const msSet = new Set(ms);
+  const catFilter = document.getElementById('catSel').value;
+  const topn = +document.getElementById('topnSel').value;
+  const kw = document.getElementById('searchInput').value.trim().toLowerCase();
+
+  let rows = rawRows.filter(r => msSet.has(r.ym));
+  if(catFilter !== '__all__') rows = rows.filter(r => r.cat === catFilter);
+  if(kw) rows = rows.filter(r => r.name.toLowerCase().includes(kw) || r.shop.toLowerCase().includes(kw));
+
+  // 跨月按 产品+店铺 聚合
+  const catMap = new Map();
+  for(const r of rows){
+    if(!catMap.has(r.cat)) catMap.set(r.cat, new Map());
+    const pm = catMap.get(r.cat);
+    const pk = r.name + '|' + r.shop;
+    if(!pm.has(pk)) pm.set(pk, {name:r.name, shop:r.shop, gmv:0, qty:0});
+    const p = pm.get(pk);
+    p.gmv += r.gmv; p.qty += r.qty;
+  }
+
+  // KPI
+  const totalGmv = rows.reduce((s,r)=>s+r.gmv,0);
+  const totalQty = rows.reduce((s,r)=>s+r.qty,0);
+  const nProducts = [...catMap.values()].reduce((s,pm)=>s+pm.size,0);
+  const label = ms.length ? (ms.length === 1 ? ms[0] : ms[0] + ' ~ ' + ms[ms.length-1]) : '—';
+  document.getElementById('kpiRow').innerHTML = [
+    ['当前时间段', label, ms.length + ' 个月'],
+    ['总 GMV', '¥' + fmt(totalGmv), ''],
+    ['总销量', fmt(totalQty), ''],
+    ['品类数', catMap.size, ''],
+    ['商品数（去重）', fmtInt(nProducts), ''],
+  ].map(([l,v,s])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="l">${s}</div></div>`).join('');
+
+  // 品类板块（按品类总GMV降序）
+  const boards = document.getElementById('boards');
+  if(!catMap.size){
+    boards.innerHTML = '<div class="panel empty" style="flex:1"><div class="big">📂</div>暂无数据 — 请上传底表，或点击「演示数据」预览效果</div>';
+    return;
+  }
+  const catArr = [...catMap.entries()].map(([cat,pm])=>{
+    const items = [...pm.values()].sort((a,b)=>b.gmv-a.gmv);
+    return {cat, items, total: items.reduce((s,p)=>s+p.gmv,0)};
+  }).sort((a,b)=>b.total-a.total);
+
+  boards.innerHTML = catArr.map((c,ci)=>{
+    const color = CAT_COLORS[ci % CAT_COLORS.length];
+    const list = topn > 0 ? c.items.slice(0, topn) : c.items;
+    const maxGmv = list.length ? list[0].gmv : 1;
+    const trs = list.map((p,i)=>{
+      const rk = i+1;
+      const rcls = rk<=3 ? ' r'+rk : '';
+      const w = maxGmv ? Math.max(2, p.gmv/maxGmv*100) : 0;
+      return `<tr>
+        <td><span class="rank${rcls}">${rk}</span></td>
+        <td><div class="pname" title="${escAttr(p.name)}">${esc(p.name)}</div><div class="shop">${esc(p.shop)}</div></td>
+        <td class="num gmv bar-cell"><div class="bar-bg" style="width:${w}%"></div><span>${fmtInt(p.gmv)}</span></td>
+        <td class="num">${p.qty ? fmtInt(p.qty) : '-'}</td>
+      </tr>`;
+    }).join('');
+    return `<div class="board">
+      <div class="board-head" style="background:${color}">
+        <span>${esc(c.cat)}</span>
+        <span class="total">GMV ¥${fmt(c.total)} · ${c.items.length} 个商品</span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th style="width:36px">#</th><th>产品 / 店铺</th><th class="num">GMV</th><th class="num">销量</th></tr></thead>
+        <tbody>${trs || '<tr><td colspan="4" style="text-align:center;color:var(--sub);padding:20px">无匹配数据</td></tr>'}</tbody>
+      </table></div>
+    </div>`;
+  }).join('');
+}
+
+/* ================= 导出 ================= */
+function exportCSV(){
+  if(!rawRows.length){ alert('暂无数据'); return; }
+  const ms = new Set(selectedMonths());
+  const catFilter = document.getElementById('catSel').value;
+  const topn = +document.getElementById('topnSel').value;
+  let rows = rawRows.filter(r => ms.has(r.ym));
+  if(catFilter !== '__all__') rows = rows.filter(r=>r.cat===catFilter);
+  const catMap = new Map();
+  for(const r of rows){
+    if(!catMap.has(r.cat)) catMap.set(r.cat, new Map());
+    const pm = catMap.get(r.cat), pk = r.name+'|'+r.shop;
+    if(!pm.has(pk)) pm.set(pk,{name:r.name,shop:r.shop,gmv:0,qty:0});
+    const p = pm.get(pk); p.gmv+=r.gmv; p.qty+=r.qty;
+  }
+  let csv = '\ufeff品类,排名,产品名称,店铺,GMV,销量\n';
+  for(const [cat,pm] of catMap){
+    let items = [...pm.values()].sort((a,b)=>b.gmv-a.gmv);
+    if(topn>0) items = items.slice(0,topn);
+    items.forEach((p,i)=>{
+      csv += [cat, i+1, '"'+p.name.replace(/"/g,'""')+'"', '"'+p.shop.replace(/"/g,'""')+'"', Math.round(p.gmv), Math.round(p.qty)].join(',') + '\n';
+    });
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+  a.download = 'GMV_Top榜单.csv';
+  a.click();
+}
+
+/* ================= 演示数据 ================= */
+function loadDemo(){
+  const cats = {
+    '美容护肤/美体/精油': [
+      ['修丽可AGE面霜 30%玻色因抗皱抗糖紧致淡纹','修丽可官方旗舰店'],
+      ['【加购】李佳琦直播间 兰蔻菁纯面霜臻宠礼盒','lancome兰蔻官方旗舰店'],
+      ['赫莲娜黑绷带面霜 50ml 修护抗老','hr赫莲娜官方旗舰店'],
+      ['欧莱雅紫熨斗眼霜二代 淡纹紧致','欧莱雅官方旗舰店'],
+      ['雅诗兰黛小棕瓶精华 第七代 100ml','雅诗兰黛官方旗舰店'],
+      ['SK-II神仙水精华露 230ml','SK-II官方旗舰店'],
+      ['珀莱雅红宝石面霜3.0 抗皱淡纹','珀莱雅官方旗舰店'],
+      ['薇诺娜舒敏保湿特护霜 50g','薇诺娜官方旗舰店'],
+      ['娇兰复原蜜黄金复原蜜精华','娇兰官方旗舰店'],
+      ['资生堂红腰子精华 100ml','资生堂官方旗舰店'],
+    ],
+    '洁面': [
+      ['芙丽芳丝净润洗面霜 氨基酸洁面','freeplus官方旗舰店'],
+      ['珂润润浸保湿洁颜泡沫','珂润官方旗舰店'],
+      ['EltaMD氨基酸泡沫洁面 207ml','eltamd海外旗舰店'],
+      ['旁氏米粹润泽洗面奶','旁氏官方旗舰店'],
+      ['至本舒颜修护洁面乳','至本官方旗舰店'],
+      ['CeraVe适乐肤修护保湿洁面','cerave官方旗舰店'],
+      ['IPSA茵芙莎黏土按摩面膜洁面','ipsa官方旗舰店'],
+      ['兰蔻清滢洁面摩丝','lancome兰蔻官方旗舰店'],
+    ],
+    '乳液/面霜': [
+      ['珂润润浸保湿滋养乳霜','珂润官方旗舰店'],
+      ['科颜氏高保湿面霜 125ml','科颜氏官方旗舰店'],
+      ['兰蔻小黑瓶发光眼霜+面霜套组','lancome兰蔻官方旗舰店'],
+      ['优时颜黑引力面霜2.0','优时颜官方旗舰店'],
+      ['HBN熊果苷透亮水乳套装','HBN官方旗舰店'],
+      ['玉泽皮肤屏障修护保湿霜','玉泽官方旗舰店'],
+      ['海蓝之谜精华面霜 60ml','lamer海蓝之谜官方旗舰店'],
+      ['AOEO山茶花保湿面霜','AOEO官方旗舰店'],
+    ],
+    '面部护理套装': [
+      ['【美妆节】兰蔻小黑瓶精华水乳护肤套装','lancome兰蔻官方旗舰店'],
+      ['雅诗兰黛小棕瓶七夕限定礼盒','雅诗兰黛官方旗舰店'],
+      ['珀莱雅早C晚A精华套装','珀莱雅官方旗舰店'],
+      ['薇诺娜舒缓修护套装 敏感肌','薇诺娜官方旗舰店'],
+      ['自然堂凝时鲜颜肌活水乳套装','自然堂官方旗舰店'],
+      ['欧诗漫珍珠白水乳套装','欧诗漫官方旗舰店'],
+      ['谷雨光感白套装 美白淡斑','谷雨官方旗舰店'],
+    ],
+    '眼霜': [
+      ['欧莱雅紫熨斗眼霜 30ml 大容量','欧莱雅官方旗舰店'],
+      ['雅诗兰黛小棕瓶眼霜 抗蓝光','雅诗兰黛官方旗舰店'],
+      ['兰蔻小黑瓶发光眼霜 20ml','lancome兰蔻官方旗舰店'],
+      ['珀莱雅红宝石眼霜 淡纹紧致','珀莱雅官方旗舰店'],
+      ['丸美小红笔眼霜 第二代','丸美官方旗舰店'],
+      ['AHC黄金蜂胶眼霜','AHC海外旗舰店'],
+      ['资生堂悦薇眼霜 抗皱紧致','资生堂官方旗舰店'],
+    ],
+  };
+  const ms = [];
+  for(let y of [2025, 2026]) for(let m = 1; m <= 12; m++){
+    if(y === 2026 && m > 6) break;
+    ms.push(y + '-' + String(m).padStart(2,'0'));
+  }
+  const rows = [];
+  let seed = 42;
+  const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  for(const [cat, prods] of Object.entries(cats)){
+    // 每个品类扩展到 ~40 个商品
+    const all = [...prods];
+    for(let i = all.length; i < 40; i++){
+      const base = prods[i % prods.length];
+      all.push([base[0].slice(0, 12) + ' 替换装/中样 #' + i, base[1]]);
+    }
+    all.forEach(([name, shop], idx) => {
+      const base = 30000000 / (idx + 1.5) * (0.6 + rnd() * 0.8);
+      for(const ym of ms){
+        if(rnd() < 0.12) continue; // 部分月份无销售
+        const season = ym.endsWith('-06') || ym.endsWith('-11') || ym.endsWith('-12') ? 1.6 : 1;
+        const gmv = base * (0.5 + rnd()) * season;
+        const price = 150 + rnd() * 850;
+        rows.push({cat, name, shop, ym, gmv: Math.round(gmv), qty: Math.round(gmv / price)});
+      }
+    });
+  }
+  rawRows = rows;
+  document.getElementById('dataTag').textContent = '演示数据 · ' + rows.length + ' 行';
+  rebuildFilters();
+  render();
+}
+
+/* ================= 事件 ================= */
+document.getElementById('granSeg').addEventListener('click', e => {
+  if(e.target.tagName !== 'BUTTON') return;
+  document.querySelectorAll('#granSeg button').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  granularity = e.target.dataset.g;
+  buildPeriodOptions();
+  render();
+});
+
+// 拖拽上传
+document.body.addEventListener('dragover', e => e.preventDefault());
+document.body.addEventListener('drop', e => {
+  e.preventDefault();
+  if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+
+loadDemo();
+</script>
+
+
+<div id="mulepage-footer" dir="ltr" class="mulepage-float" style="position:fixed !important;bottom:16px !important;right:16px !important;z-index:2147483646;display:inline-flex;align-items:center;padding:0;cursor:pointer;background:transparent;border:0;box-shadow:none;font-family:Inter,-apple-system,BlinkMacSystemFont,&#39;Segoe UI&#39;,&#39;Helvetica Neue&#39;,sans-serif;"><span id="mulepage-footer-link" style="display:inline-flex;align-items:center;line-height:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:104px;height:32px;padding:6px 12px;box-sizing:border-box;border-radius:999px;background:#f5f5f5;"><span style="display:inline-flex;align-items:center;gap:4px;line-height:0;"><img src="./李佳琦直播间 宝贝 GMV Top30 看板_files/O1CN01KjiMsP20F9vea7rMy_!!6000000006819-55-tps-20-20.svg" alt="" width="20" height="20" style="display:block;user-select:none;"><img src="./李佳琦直播间 宝贝 GMV Top30 看板_files/O1CN01Hn0m411NLmdtyiXpF_!!6000000001554-55-tps-56-14.svg" alt="千问办公" width="56" height="14" style="display:block;user-select:none;"></span></span></span></div></body></html>
