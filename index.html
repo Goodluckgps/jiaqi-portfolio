@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="郝嘉琪的个人主页第二版：数据拆解、市场分析与用户洞察。">
+  <title>郝嘉琪｜Portfolio 02</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="reading-progress" aria-hidden="true"><i></i></div>
+  <div class="site-atmosphere" aria-hidden="true">
+    <span class="atmosphere-glow glow-rose"></span>
+    <span class="atmosphere-glow glow-mint"></span>
+    <span class="atmosphere-dune dune-back"></span>
+    <span class="atmosphere-dune dune-middle"></span>
+    <span class="atmosphere-dune dune-front"></span>
+    <span class="atmosphere-grain"></span>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="#intro" aria-label="返回首页">
+      <b>JQ</b><span>PORTFOLIO 02</span>
+    </a>
+    <nav aria-label="页面导航">
+      <a href="#intro" class="is-active"><i>01</i>你好</a>
+      <a href="#campus"><i>02</i>校园经历</a>
+      <a href="#projects"><i>03</i>项目经历</a>
+      <a href="#work"><i>04</i>工作经历</a>
+      <a href="#lab"><i>05</i>AI Coding</a>
+      <a href="#life"><i>06</i>生活切片</a>
+    </nav>
+    <button class="language-switch" type="button" data-language-switch aria-label="切换到英文">
+      <span data-language-option="zh" class="is-active">中</span><span data-language-option="en">EN</span>
+    </button>
+    <a class="version-link" href="assets/郝嘉琪简历_27届校招.pdf" target="_blank" rel="noreferrer">查看个人简历 PDF ↗</a>
+    <button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="scene hero" id="intro" data-scene="01">
+      <div class="hero-grid scene-shell">
+        <figure class="portrait-card reveal-from-left" data-tilt>
+          <img src="assets/portrait-original.jpg" alt="郝嘉琪个人照片">
+          <figcaption><span>HAO JIAQI</span><span>2026</span></figcaption>
+        </figure>
+
+        <div class="hero-copy hero-glass-card reveal-from-right">
+          <p class="eyebrow">HELLO / 你好，很高兴认识你</p>
+          <p class="hero-meta">2027届 · 经济学 · 市场营销 · 电商运营 · 数据分析</p>
+          <h1><span>我是</span><em>郝嘉琪。</em></h1>
+          <p class="hero-statement">看清市场、理解用户，<br>也让数据变成行动。</p>
+          <p class="hero-lead">关注电商运营、市场研究与用户研究，喜欢把分散的信息整理成清晰、可执行的业务判断。</p>
+          <div class="role-row" aria-label="个人方向">
+            <span>市场营销</span><span>电商运营</span><span>数据分析</span>
+          </div>
+        </div>
+
+        <button class="greeting-character" type="button" aria-label="点击打招呼" data-greeting>
+          <img src="assets/greeting-fixed-base-transparent-v5.png" alt="郝嘉琪挥手说嗨的三维卡通形象">
+          <span class="greeting-bubble" aria-live="polite">Hi，欢迎来认识我！</span>
+        </button>
+      </div>
+      <div class="scene-index" aria-hidden="true"><span>01</span><i></i><b>INTRO</b></div>
+      <a class="scroll-hint" href="#campus"><span>SCROLL TO EXPLORE</span><i>↓</i></a>
+    </section>
+
+    <section class="scene new-campus" id="campus" data-scene="02">
+      <div class="scene-shell campus-layout reveal-up">
+        <div class="campus-mascot"><img src="assets/graduation-mascot.png" alt="毕业主题三维卡通形象"><span>从模型出发，<br>走向真实业务。</span></div>
+        <div class="campus-copy"><p class="eyebrow">02 / CAMPUS</p><h2>校园经历</h2><p>本科建立数据与金融基础，硕士阶段把研究方法带进市场问题。</p><div class="campus-degrees"><article><time>2024—2027</time><b>东北财经大学</b><span>国际贸易学 · 硕士</span><small>专业排名 1 / 30 · GPA 4.4 / 5.0</small></article><article><time>2020—2024</time><b>南京航空航天大学</b><span>金融学 · 学士</span><small>计量经济学 · Python · 机器学习</small></article></div></div>
+        <figure class="campus-photo"><img src="assets/graduation.jpg" alt="郝嘉琪本科毕业照"><figcaption>GRADUATION / 2024</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="scene experience-section projects-section" id="projects" data-scene="03">
+      <div class="scene-shell experience-shell">
+        <header class="experience-heading reveal-up"><p class="eyebrow">03 / PROJECT EXPERIENCE</p><h2>三个项目，三种真实问题。</h2><span>点击项目切换，查看问题、方法与结果。</span></header>
+        <div class="experience-tabs reveal-up" role="tablist" data-exp-tabs="projects"><button class="is-active" data-exp="project-wehab"><i>01</i>WeHab 用户研究</button><button data-exp="project-peach"><i>02</i>水蜜桃直播运营</button><button data-exp="project-studio"><i>03</i>摄影工作室</button></div>
+        <div class="experience-panels reveal-up" data-exp-panels="projects">
+          <article class="experience-panel is-active" id="project-wehab"><div class="exp-copy wehab-copy"><img class="wehab-copy-mascot" src="assets/ability-market-user-research.png" alt="用户研究三维卡通场景"><div class="wehab-question-card"><small>RESEARCH QUESTION</small><b>一款新产品，怎样找到<br>最先愿意购买的人？</b><div><span>谁会买</span><i>→</i><span>为什么买</span><i>→</i><span>如何进入</span></div></div><small>USER INSIGHT · MARKET ENTRY</small><h3 class="wehab-title"><span>中风远程康复产品内地市场冷启动，</span><span>找到核心购买群体、目标市场与影响因素。</span></h3><p>围绕院外卒中康复系统 WeHab，检验产品接受度，并把消费者证据转化为定位和 4P 进入策略。</p><div class="exp-route"><span>概念测试</span><i>→</i><span>因子分析</span><i>→</i><span>回归验证</span><i>→</i><span>市场策略</span></div><ul class="wehab-metrics"><li><b>18</b> 项核心产品属性</li><li><b>0.881</b> 解释力度 R²</li></ul></div><div class="exp-visual wehab-visual wehab-wall"><button class="wehab-feature" type="button" data-wehab-open aria-label="打开 WeHab 产品与研究图库"><img src="assets/wehab-platform.png" alt="WeHab 智慧康复平台与产品套装"><span><small>PRODUCT EVIDENCE</small><b>从产品，到服务，再到疗法依据</b><em>点击查看完整图库 ↗</em></span></button><div class="wehab-stack" aria-hidden="true"><img src="assets/wehab-hardware.png" alt=""><img src="assets/wehab-workflow.png" alt=""></div><div class="wehab-proof"><span>产品平台</span><i>+</i><span>智能硬件</span><i>+</i><span>疗法证据</span></div></div></article>
+          <article class="experience-panel" id="project-peach" hidden><div class="exp-copy project-story-copy"><img class="project-story-image" src="assets/data-analysis.png" alt="电商增长指标分析与商业化运营场景"><div class="wehab-question-card project-question-card"><small>CORE QUESTION</small><b>一场电商直播，怎样真正<br>产出可复用的增长方法？</b><div><span>拆节点</span><i>→</i><span>调策略</span><i>→</i><span>沉淀方法</span></div></div><small>LIVE COMMERCE · RURAL REVITALIZATION</small><h3>从田间调研到直播推广，把一次暑期实践做成可复盘的电商助农项目。</h3><p>线下走访水蜜桃与葡萄基地，梳理农产品和村民的电商需求；线上拆分直播节点，持续调整选品、讲解脚本和互动节奏。</p><div class="exp-route"><span>田间调研</span><i>→</i><span>电商科普</span><i>→</i><span>直播推广</span><i>→</i><span>媒体传播</span></div><ul><li><b>≈20%</b> 单场 GMV 提升</li><li><b>6w+</b> 直播点赞</li><li><b>6+</b> 校内外媒体报道</li></ul></div><div class="exp-visual peach-visual media-wall"><button class="media-feature" type="button" data-media-open aria-label="打开电商助农项目报道合集"><img src="assets/peach-media-toutiao.png" alt="今日头条电商助农项目报道"><span><small>MEDIA ARCHIVE</small><b>电商助农项目报道合集</b><em>点击展开 6 篇报道 ↗</em></span></button><div class="media-stack" aria-hidden="true"><img src="assets/peach-media-tv.png" alt=""><img src="assets/peach-media-haimen.png" alt=""><img src="assets/peach-media-campus.png" alt=""></div><div class="media-strip"><span>田间调研</span><i>→</i><span>直播推广</span><i>→</i><span>媒体报道</span></div></div></article>
+          <article class="experience-panel" id="project-studio" hidden><div class="exp-copy project-story-copy"><div class="studio-brand-animation" aria-label="奇奇妙妙摄影动态标识"><span class="studio-spark spark-one">✦</span><span class="studio-spark spark-two">✦</span><div class="studio-print print-one"></div><div class="studio-print print-two"></div><div class="studio-camera"><i></i><b></b><em></em></div><strong>奇奇妙妙摄影</strong><small>QIQIMIAOMIAO STUDIO</small></div><div class="wehab-question-card project-question-card"><small>CORE QUESTION</small><b>一次商业拍摄，怎样从创意<br>走到稳定交付与持续合作？</b><div><span>定方案</span><i>→</i><span>做拍摄</span><i>→</i><span>促复购</span></div></div><small>CONTENT STRATEGY · DELIVERY</small><h3>让内容不只好看，也能推动一次真实合作落地。</h3><p>围绕垂类账号做竞品、受众与场景分析，把选题判断转化为拍摄方案、内容交付和客户沟通。</p><div class="exp-route"><span>竞品观察</span><i>→</i><span>选题设计</span><i>→</i><span>拍摄执行</span><i>→</i><span>内容复盘</span></div><ul><li><b>150+</b> 垂类内容项目</li><li><b>10+</b> 场拍摄落地</li><li><b>4 年</b> 持续参与</li></ul></div><div class="exp-visual studio-visual"><div class="photo-stack studio-photo-stack"><figure><img src="assets/qiqumiao-studio-classroom.jpg" alt="教室青春主题多人摄影作品"><figcaption><small>QI QI MIAO MIAO STUDIO</small><b>校园写真 · 把青春留在镜头里</b></figcaption></figure><img src="assets/qiqumiao-studio-graduation-v2.png" alt="毕业季抛帽双人摄影作品"></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene experience-section work-section" id="work" data-scene="04">
+      <div class="scene-shell experience-shell">
+        <header class="experience-heading light work-experience-heading reveal-up">
+          <p class="eyebrow">04 / WORK EXPERIENCE · UNISKIN</p>
+          <div class="internship-overview">
+            <h2><span>用数据连接渠道表现</span><span>与营销决策。</span></h2>
+            <dl>
+              <div><dt>时间</dt><dd>2026年7月—至今</dd></div>
+              <div><dt>部门</dt><dd>优时颜品牌营销——通路行销&amp;数据部</dd></div>
+              <div><dt>岗位</dt><dd>营销数据岗</dd></div>
+            </dl>
+          </div>
+          <div class="uniskin-brand-mark"><img src="assets/uniskin-logo-transparent-hd.png" alt="UNISKIN 优时颜 Logo"></div>
+        </header>
+        <div class="work-nav reveal-up" role="tablist" data-exp-tabs="work"><button class="is-active" data-exp="work-channel"><i>01</i><b>渠道追踪</b><span>每天的收入与预算，哪里出现异常？</span></button><button data-exp="work-competitor"><i>02</i><b>竞品分析</b><span>竞品靠什么增长，直播是否挤压自营？</span></button><button data-exp="work-industry"><i>03</i><b>行业研究</b><span>增长正在向哪些平台、品类与产品迁移？</span></button><button data-exp="work-ai"><i>04</i><b>AI 提效</b><span>怎样把重复取数变成可复用的工具？</span></button></div>
+        <div class="work-panels reveal-up" data-exp-panels="work">
+          <article class="work-panel is-active" id="work-channel"><div class="work-copy"><small>CHANNEL TRACKING</small><h3>每天的收入与预算，哪里出现异常？</h3><p>独立负责 6 张经营表，覆盖天猫、抖音两大渠道，按日、周、月、季度与半年五个周期追踪收入预算和销售情况；日均处理 2k+ 数据，并围绕重点品、行业研究与日常经营，监测 GMV、投入花费、ROI、流量与转化率等指标。</p><div><span>收入预算</span><i>→</i><span>销售表现</span><i>→</i><span>异常定位</span></div><ul class="work-stats"><li><b data-count="2000" data-suffix="+" data-compact="true">0</b><span>日均处理数据</span></li><li><b data-count="6">0</b><span>独立负责经营表</span></li><li><b data-count="5">0</b><span>经营追踪周期</span></li></ul></div><div class="sheet-mock channel-sheet"><header><b>渠道销售日报</b><span>Y26 / WEEKLY</span></header><section><span>渠道</span><span>实际收入</span><span>预算达成</span><span>状态</span><b>天猫</b><i style="--w:82%"></i><em>82%</em><small>跟进</small><b>抖音</b><i style="--w:104%"></i><em>104%</em><small class="ok">达成</small><b>其他</b><i style="--w:67%"></i><em>67%</em><small>观察</small></section></div></article>
+          <article class="work-panel" id="work-competitor" hidden><div class="work-copy"><small>COMPETITOR STUDY</small><h3>竞品靠什么增长，直播是否挤压自营？</h3><p>固定追踪洁面、眼霜、面霜与防晒四类重点产品，在天猫、抖音覆盖 20+ 品牌；一方面拆解增长趋势、上新节奏与营销动作，另一方面对照天猫整体、自营与李佳琦直播口径，判断直播节点对品牌自营的真实影响。</p><div><span>重点产品</span><i>→</i><span>营销动作</span><i>→</i><span>渠道影响</span></div><ul class="work-stats"><li><b data-count="4">0</b><span>重点产品品类</span></li><li><b data-count="20" data-suffix="+">0</b><span>持续追踪品牌</span></li><li><b data-count="2">0</b><span>覆盖电商平台</span></li></ul></div><div class="competitor-board"><span><b>HBN</b><strong>−85.0%</strong><small>节点性迁移</small></span><span><b>至简</b><strong>+124.9%</strong><small>并非稳定挤压</small></span><span><b>芙丽芳丝</b><strong>+68.8%</strong><small>需求增量</small></span><svg viewBox="0 0 500 150"><path d="M20 122 C95 118 105 32 178 77 S288 126 330 55 S420 30 480 18"/></svg></div></article>
+          <article class="work-panel" id="work-industry" hidden><div class="work-copy"><small>INDUSTRY RESEARCH</small><h3>增长正在向哪些平台、品类与产品迁移？</h3><p>围绕 GMV 与 ROI 两个核心结果，整合天猫与抖音行业数据，从平台、细分品类、品牌、产品和 Top 榜单逐层拆解；覆盖 8 个护肤细分品类，并将研究结论沉淀为 3 份专题分析。</p><div><span>GMV / ROI</span><i>→</i><span>平台与品类</span><i>→</i><span>品牌与产品</span></div><ul class="work-stats"><li><b data-count="3">0</b><span>专题分析</span></li><li><b data-count="8">0</b><span>护肤细分品类</span></li><li><b data-count="2">0</b><span>覆盖电商平台</span></li></ul></div><div class="industry-map"><span class="total"><small>淘抖整体</small><b>+9.9%</b></span><span class="tmall"><small>淘宝 GMV</small><b>−8.6%</b></span><span class="douyin"><small>抖音 GMV</small><b>+21.1%</b></span><div><i style="--s:38%">洁面</i><i style="--s:54%">化妆水</i><i style="--s:72%">精华</i></div></div></article>
+          <article class="work-panel" id="work-ai" hidden><div class="work-copy"><small>AI EFFICIENCY</small><h3>怎样把重复取数变成可复用的工具？</h3><p>从 0 到 1 搭建直播间产品经营分析工具，将 Excel 拖拽上传、字段自动映射、6 类品类识别、跨周期筛选与结果导出固化为标准流程，把单日报处理从约 1 小时缩短到约 0.4 小时。</p><div><span>原始底表</span><i>→</i><span>自动处理</span><i>→</i><span>复用工具</span></div><ul class="work-stats"><li><b data-count="60" data-suffix="%">0</b><span>单日报处理提效</span></li><li><b data-count="6">0</b><span>自动识别品类</span></li><li><b data-count="3">0</b><span>GMV 异常识别反馈</span></li></ul></div><a class="work-dashboard" href="assets/gmv-top30-dashboard.html" target="_blank"><img src="assets/gmv-preview.png" alt="李佳琦直播GMV Top30看板"><span>打开网页作品 ↗</span></a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene new-lab" id="lab" data-scene="05">
+      <div class="scene-shell lab-shell">
+        <header class="experience-heading light reveal-up"><p class="eyebrow">05 / AI CODING</p><h2>工作之外，我还在做两件事。</h2><span>一个已经上线使用，一个正在把真实业务流程产品化。</span></header>
+        <div class="lab-grid reveal-up">
+          <article>
+            <a class="lab-preview-full" href="assets/PathPilot.html" target="_blank"><img src="assets/pathpilot-full-preview.png" alt="PathPilot个人申请工作台完整网页"><span>查看完整网页 ↗</span></a>
+            <small class="product-status is-live"><i></i>已上线</small>
+            <h3>PathPilot 个人申请工作台</h3>
+            <p>针对求职信息分散、申请节点繁多、跟进状态难以统筹的问题，设计一体化申请工作台，将岗位机会、截止时间、申请材料与进度集中管理，让待办更清晰、优先级更明确，支持有序推进每一次申请。</p>
+            <a href="assets/PathPilot.html" target="_blank">打开网页作品 ↗</a>
+          </article>
+          <article class="brand-review-card">
+            <a class="lab-preview-full" href="assets/brand-review-screen-1.png" data-review-open><img src="assets/brand-review-web-preview.png" alt="AI品牌经营复盘助手开发阶段网页界面，模拟数据演示"><span>浏览全部 6 个页面 ↗</span></a>
+            <small class="demo-data-note">界面演示 · 数据为模拟数据</small>
+            <small class="product-status is-building"><i></i>正在产品化</small>
+            <h3>AI 品牌经营复盘助手</h3>
+            <p>针对多渠道经营数据分散、指标口径复杂、人工复盘重复耗时的问题，设计 AI 辅助复盘工具，将数据整理、指标分析与异常诊断串联为统一流程，帮助团队从报表中定位经营问题，为资源分配与营销调整提供依据。</p>
+            <a href="assets/brand-review-screen-1.png" data-review-open>浏览全部 6 个页面 ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene method" id="method" data-scene="02">
+      <div class="method-orbit one" aria-hidden="true"></div>
+      <div class="method-orbit two" aria-hidden="true"></div>
+      <div class="method-grid scene-shell">
+        <div class="method-visual reveal-from-left">
+          <span class="visual-note top">WHAT HAPPENED?</span>
+          <img src="assets/data-analysis.png" alt="郝嘉琪进行数据分析的三维卡通形象">
+          <span class="visual-note bottom">WHAT SHOULD WE DO?</span>
+        </div>
+
+        <div class="method-copy reveal-from-right">
+          <p class="eyebrow light">02 / HOW I THINK</p>
+          <h2>不止整合数据，<br>更解释数据背后的<br><em>用户与市场。</em></h2>
+          <p>我习惯先还原问题，再选择指标和方法。数据负责描述变化，市场帮助定位机会，用户则解释变化为什么发生。</p>
+          <ol class="method-steps">
+            <li><span>01</span><div><b>整理</b><small>统一口径，让信息可以比较</small></div></li>
+            <li><span>02</span><div><b>拆解</b><small>沿渠道、人群与场景寻找变量</small></div></li>
+            <li><span>03</span><div><b>行动</b><small>把判断翻译成下一步方案</small></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="scene-index light" aria-hidden="true"><span>02</span><i></i><b>METHOD</b></div>
+    </section>
+
+    <section class="scene abilities" id="abilities" data-scene="02">
+      <div class="abilities-shell scene-shell">
+        <header class="abilities-heading reveal-up">
+          <div>
+            <p class="eyebrow">02 / THREE CONNECTED LENSES</p>
+            <h2>三种视角，<br><em>一条判断链路。</em></h2>
+          </div>
+          <p>它们解决不同问题，但最终都指向同一件事：减少模糊，让下一步更有依据。</p>
+          <button class="ability-companion" type="button" data-ability-companion aria-label="点击市场与用户研究形象查看研究笔记">
+            <img src="assets/ability-market-user-research.png" alt="郝嘉琪整理用户画像、市场细分和用户旅程的三维卡通场景">
+            <span aria-live="polite">用户说了什么？</span>
+          </button>
+        </header>
+
+        <div class="merged-method reveal-up" aria-label="工作方法">
+          <span><i>01</i><b>整理</b><small>统一口径，让信息可以比较</small></span>
+          <em>→</em><span><i>02</i><b>拆解</b><small>沿渠道、人群与场景寻找变量</small></span>
+          <em>→</em><span><i>03</i><b>行动</b><small>把判断翻译成下一步方案</small></span>
+        </div>
+
+        <div class="ability-tabs reveal-up" role="tablist" aria-label="能力视角" data-tab-group="ability">
+          <button class="is-active" type="button" role="tab" aria-selected="true" data-tab="ability-data"><span>01</span>数据拆解</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="ability-market"><span>02</span>市场分析</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="ability-user"><span>03</span>用户洞察</button>
+        </div>
+
+        <div class="ability-panels reveal-up" data-panels="ability">
+          <article class="ability-panel data is-active" id="ability-data" role="tabpanel">
+            <div class="ability-copy">
+              <p>DATA DECOMPOSITION</p>
+              <h3>把复杂业务拆成<br>可比较、可追踪、<br><em>可行动的指标。</em></h3>
+              <div class="ability-flow"><span>原始数据</span><i>→</i><span>指标关系</span><i>→</i><span>经营动作</span></div>
+              <ul><li>口径整理与取数 SOP</li><li>渠道、漏斗与 ROI 拆解</li><li>日报、复盘与异常定位</li></ul>
+            </div>
+            <div class="ability-art chart-art" aria-hidden="true">
+              <div class="metric"><b>GMV</b><span>成交结果</span></div>
+              <div class="metric"><b>ROI</b><span>投入效率</span></div>
+              <div class="metric"><b>CVR</b><span>链路转化</span></div>
+              <svg viewBox="0 0 520 270"><path d="M24 225 C92 212 105 165 160 178 S246 206 276 131 S371 104 490 35"/><g><circle cx="24" cy="225" r="7"/><circle cx="160" cy="178" r="7"/><circle cx="276" cy="131" r="7"/><circle cx="490" cy="35" r="7"/></g></svg>
+            </div>
+          </article>
+
+          <article class="ability-panel market" id="ability-market" role="tabpanel" hidden>
+            <div class="ability-copy">
+              <p>MARKET ANALYSIS</p>
+              <h3>不只判断市场大小，<br>更找到值得进入的<br><em>机会坐标。</em></h3>
+              <div class="ability-flow"><span>行业供需</span><i>→</i><span>竞争地图</span><i>→</i><span>进入策略</span></div>
+              <ul><li>行业趋势与细分类目研究</li><li>竞品、价格带与渠道比较</li><li>市场规模与机会优先级</li></ul>
+            </div>
+            <div class="ability-art market-art" aria-hidden="true">
+              <div class="market-ring"><span>机会</span></div>
+              <b class="market-tag one">需求强度</b><b class="market-tag two">竞争密度</b><b class="market-tag three">进入门槛</b>
+            </div>
+          </article>
+
+          <article class="ability-panel user" id="ability-user" role="tabpanel" hidden>
+            <div class="ability-copy">
+              <p>USER INSIGHT</p>
+              <h3>从行为与反馈里，<br>识别需求、障碍与<br><em>真实使用场景。</em></h3>
+              <div class="ability-flow"><span>用户表达</span><i>→</i><span>人群分层</span><i>→</i><span>场景方案</span></div>
+              <ul><li>问卷设计与需求验证</li><li>用户画像、分层与旅程</li><li>痛点提炼与信息转译</li></ul>
+            </div>
+            <div class="ability-art user-art" aria-hidden="true">
+              <div class="avatar a"><i></i><span>效率型</span></div><div class="avatar b"><i></i><span>品质型</span></div><div class="avatar c"><i></i><span>体验型</span></div>
+              <div class="insight-card"><small>KEY INSIGHT</small><b>人们说了什么，<br>与真正需要什么？</b></div>
+            </div>
+          </article>
+        </div>
+
+        <p class="evidence-note reveal-up"><span>关于数字</span>不做跨经历的“大汇总”。方法在这里展示，结果回到每一段真实经历里单独说明。</p>
+      </div>
+      <div class="scene-index" aria-hidden="true"><span>02</span><i></i><b>LENSES</b></div>
+    </section>
+
+    <section class="case-study case-lab" id="legacy-case-cleanser" data-scene="04">
+      <div class="case-lab-shell scene-shell">
+        <header class="case-lab-heading reveal-up">
+          <div><span>CASE 01</span><p>竞品研究 · 渠道分析 · 经营判断</p></div>
+          <h2>头部直播，究竟带来<em>新增</em>，<br>还是让成交<em>换了地方？</em></h2>
+          <p>我把五个洁面竞品的天猫整体、自营与李佳琦渠道放在同一口径下，追踪直播节点前后的变化。</p>
+        </header>
+
+        <div class="case-lab-body reveal-up">
+          <aside class="case-researcher" aria-label="数据分析形象">
+            <img src="assets/data-analysis.png" alt="郝嘉琪进行渠道数据分析的三维卡通形象">
+            <div class="research-bubble"><span>判断标准</span><b>自营绝对销售额</b><small>不是只看直播渠道占比</small></div>
+          </aside>
+
+          <div class="case-console">
+            <div class="case-tabs" role="tablist" aria-label="竞品数据对比" data-tab-group="case">
+              <button class="is-active" type="button" role="tab" aria-selected="true" data-tab="case-hbn"><span>01</span>HBN</button>
+              <button type="button" role="tab" aria-selected="false" data-tab="case-zhijian"><span>02</span>至简</button>
+              <button type="button" role="tab" aria-selected="false" data-tab="case-freeplus"><span>03</span>芙丽芳丝</button>
+            </div>
+            <div class="case-panels" data-panels="case">
+              <article class="case-panel is-active" id="case-hbn" role="tabpanel">
+                <div class="case-panel-copy"><small>2025.10 直播节点</small><h3>成交高度集中，<br>自营短期回落。</h3><p>李佳琦贡献天猫销售 <strong>96.2%</strong>，自营环比 <strong>−85.0%</strong>，次月迅速恢复。</p><b class="case-verdict risk">节点性渠道迁移</b></div>
+                <div class="mini-chart" aria-label="HBN直播节点销售变化"><div><i style="--h:30%"></i><span>9月<br>702万</span></div><div class="hot"><i style="--h:7%"></i><i class="live" style="--h:94%"></i><span>10月<br>直播2657万</span></div><div><i style="--h:76%"></i><span>11月<br>2104万</span></div></div>
+              </article>
+              <article class="case-panel" id="case-zhijian" role="tabpanel">
+                <div class="case-panel-copy"><small>三个主要直播节点</small><h3>有迁移迹象，<br>但并非稳定规律。</h3><p>两次自营下降 <strong>−79.5% / −28.2%</strong>；另一次直播放量时，自营反而 <strong>+124.9%</strong>。</p><b class="case-verdict mixed">阶段性挤压</b></div>
+                <div class="pulse-chart" aria-label="至简三个直播节点"><div><span>2025.05</span><i style="--v:21%"></i><b>−79.5%</b></div><div><span>2025.10</span><i class="up" style="--v:88%"></i><b>+124.9%</b></div><div><span>2026.05</span><i style="--v:46%"></i><b>−28.2%</b></div></div>
+              </article>
+              <article class="case-panel" id="case-freeplus" role="tabpanel">
+                <div class="case-panel-copy"><small>三个主要直播节点</small><h3>直播放量，<br>自营也同步增长。</h3><p>自营分别增长 <strong>+68.8% / +19.7% / +25.3%</strong>，更接近需求增量与渠道协同。</p><b class="case-verdict growth">直播带来增量</b></div>
+                <div class="pulse-chart growth-bars" aria-label="芙丽芳丝三个直播节点"><div><span>2025.05</span><i class="up" style="--v:82%"></i><b>+68.8%</b></div><div><span>2025.10</span><i class="up" style="--v:35%"></i><b>+19.7%</b></div><div><span>2026.05</span><i class="up" style="--v:44%"></i><b>+25.3%</b></div></div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <footer class="case-lab-footer reveal-up">
+          <div class="case-method-line"><span>选竞品</span><i>→</i><span>拆渠道</span><i>→</i><span>标节点</span><i>→</i><span>判影响</span></div>
+          <p><b>我的判断：</b>头部直播不是简单的渠道选择题。商品差异、价格机制与店铺承接能力，共同决定它带来新增需求，还是短期迁移。</p>
+        </footer>
+      </div>
+      <div class="scene-index" aria-hidden="true"><span>04</span><i></i><b>CASE STUDY</b></div>
+    </section>
+
+    <section class="market-notebook" id="legacy-case-market">
+      <div class="market-shell scene-shell">
+        <header class="market-heading reveal-up">
+          <div><span>CASE 02</span><p>淘抖美肤市场 · 品类研究</p></div>
+          <h2>我把两个平台放在一起，<br>看见了<em>两种增长方向。</em></h2>
+          <p>这不是一份被搬上网页的行业报告，而是我从数据里留下的几页研究手记。</p>
+        </header>
+
+        <div class="research-desk reveal-up">
+          <div class="desk-grid" aria-hidden="true"></div>
+          <div class="channel-ribbon"><span>TMALL / 货架</span><i></i><span>DOUYIN / 内容</span></div>
+
+          <article class="market-thought">
+            <p>FIRST OBSERVATION</p>
+            <h3>市场还在增长，<br>但增长没有平均发生。</h3>
+            <span>2026年上半年，美肤市场整体GMV同比增长约9.9%。拆开渠道后，方向完全不同。</span>
+          </article>
+
+          <div class="number-scrap scrap-market" data-drift="left">
+            <small>淘抖整体</small><b><span data-count="9.9">9.9</span>%</b><p>市场仍在增长</p>
+          </div>
+          <div class="number-scrap scrap-tmall" data-drift="right">
+            <small>淘宝 GMV</small><b>−<span data-count="8.6">8.6</span>%</b><p>货架渠道回落</p>
+          </div>
+          <div class="number-scrap scrap-douyin" data-drift="left">
+            <small>抖音 GMV</small><b>+<span data-count="21.1">21.1</span>%</b><p>内容渠道放量</p>
+          </div>
+
+          <div class="share-note">
+            <span>于是我继续追问</span>
+            <p>增长发生在<em>哪些品类</em>？<br>又更依赖<em>哪个平台</em>？</p>
+            <b><span data-count="68.6">68.6</span>%</b><small>淘抖美肤GMV来自抖音</small>
+          </div>
+
+          <div class="category-trail" aria-label="重点品类发现">
+            <button type="button"><i style="--size:86px"></i><span>非液态精华</span><b>+195.6%</b><small>抖音占比 94.2%</small></button>
+            <button type="button"><i style="--size:66px"></i><span>化妆水</span><b>+28.5%</b><small>抖音增长 52.3%</small></button>
+            <button type="button"><i style="--size:58px"></i><span>洁面</span><b>+13.4%</b><small>抖音增长 30.6%</small></button>
+          </div>
+
+          <div class="market-mascot">
+            <img src="assets/greeting-fixed-base-transparent-v2.png" alt="郝嘉琪观察市场数据的三维卡通形象">
+            <p>热门，不等于机会。<br>关键是增长来自哪里。</p>
+          </div>
+        </div>
+
+        <footer class="market-ending reveal-up">
+          <p>我喜欢市场研究，是因为它能把零散的商品、内容和数字，还原成<strong>用户正在发生的选择。</strong></p>
+          <span>独立完成数据整理 · 渠道拆解 · 品类比较 · 机会判断</span>
+        </footer>
+      </div>
+    </section>
+
+    <section class="ai-project" id="legacy-case-ai">
+      <div class="ai-project-shell scene-shell">
+        <header class="ai-project-heading reveal-up">
+          <div><span>CASE 03</span><p>直播复盘 · VIBE CODING · AI 产品原型</p></div>
+          <h2>我不想一直搬运数字，<br>于是把复盘做成了<em>可以追问的工具。</em></h2>
+          <p>从李佳琦直播 Top30 看板，到 AI 品牌经营复盘助手：重复工作被整理成一条可以复用的分析链路。</p>
+        </header>
+
+        <div class="ai-product-stage reveal-up">
+          <div class="tool-window dashboard-window">
+            <div class="window-bar"><i></i><i></i><i></i><span>LIVE COMMERCE / TOP 30</span></div>
+            <img src="assets/gmv-preview.png" alt="李佳琦直播间宝贝GMV Top30数据看板">
+            <div class="dashboard-caption"><small>01 / 已完成</small><b>把分散直播明细，整理成可筛选的品类与商品排行。</b></div>
+          </div>
+
+          <div class="flow-bridge" aria-hidden="true"><span>EXCEL</span><i>→</i><span>METRIC</span><i>→</i><span>AI</span></div>
+
+          <div class="tool-window ai-window">
+            <div class="window-bar"><i></i><i></i><i></i><span>AI BRAND REVIEW / MVP PROTOTYPE</span></div>
+            <div class="ai-window-inner">
+              <div class="ai-status"><span><i></i>数据已接入</span><small>W30 · 21条销售记录</small></div>
+              <div class="ai-task-tabs" role="tablist" aria-label="AI快捷分析任务">
+                <button class="is-active" type="button" data-ai-task="channel">诊断渠道异常</button>
+                <button type="button" data-ai-task="growth">发现增长机会</button>
+                <button type="button" data-ai-task="weekly">生成经营周报</button>
+              </div>
+              <div class="agent-trace"><span>识别任务</span><i></i><span>调用分析模块</span><i></i><span>生成建议</span></div>
+              <article class="ai-answer" data-ai-answer>
+                <small>AI DIAGNOSIS</small>
+                <h3>异常不在转化，<br>而在流量入口。</h3>
+                <div><b>数据发现</b><p>天猫UV下降，转化率基本稳定；流量端是本次波动的主要来源。</p></div>
+                <div><b>原因判断</b><p>搜索流量回落，需要结合品牌词份额与竞品投放进一步验证。</p></div>
+                <div class="action"><b>下一步</b><p>优先检查搜索入口，再决定是否调整投放和商品承接。</p></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="ai-maker-note">
+            <img src="assets/data-analysis.png" alt="郝嘉琪设计AI分析工具的三维卡通形象">
+            <p><span>我做的不只是界面</span>我把真实工作拆成字段识别、指标计算、原因分析和行动建议。</p>
+          </div>
+        </div>
+
+        <footer class="ai-project-footer reveal-up">
+          <div><span>真实起点</span><b>每周复盘需要跨表整理、计算与写结论</b></div>
+          <i>→</i>
+          <div><span>工具沉淀</span><b>数据上传 → 指标计算 → AI诊断 → 行动建议</b></div>
+          <i>→</i>
+          <div><span>作品价值</span><b>把业务理解翻译成可复用的产品逻辑</b></div>
+        </footer>
+      </div>
+    </section>
+
+    <section class="project-story" id="case-cleanser" data-scene="03">
+      <div class="story-intro scene-shell reveal-up">
+        <p>03 / SELECTED WORK</p>
+        <h2>从发现一个异常，<br>到理解<em>一片市场。</em></h2>
+        <span>三个项目不是三份报告，而是我从识别问题、理解市场，到把方法做成工具的完整过程。</span>
+      </div>
+
+      <div class="story-layout scene-shell">
+        <div class="story-copy">
+          <article class="story-step is-active" data-story-step="channel">
+            <small>01 · 发现问题</small>
+            <p class="story-bridge">最初，我面对的只是一张不断更新的直播数据表。</p>
+            <h3>直播增长，究竟是新增需求，<br>还是成交<em>换了地方？</em></h3>
+            <p>我把 HBN、至简、芙丽芳丝等洁面竞品的天猫自营与李佳琦渠道放在同一口径下，观察直播节点前后的绝对销售变化。</p>
+            <div class="story-facts"><span><b>HBN</b>自营 −85.0%</span><span><b>至简</b>阶段性迁移</span><span><b>芙丽芳丝</b>自营同步增长</span></div>
+            <blockquote>同样进入头部直播，结果却不是同一条路。</blockquote>
+          </article>
+
+          <article class="story-step" data-story-step="market">
+            <small>02 · 扩大视野</small>
+            <p class="story-bridge">但只看几个竞品，还不足以理解市场。</p>
+            <h3>我把淘宝和抖音放在一起，<br>看见了<em>两种增长方向。</em></h3>
+            <p>2026年上半年，美肤市场仍在增长；拆开渠道后，淘宝回落、抖音放量。增长不是平均发生，而是沿平台和品类重新分布。</p>
+            <div class="story-facts market-facts"><span><b>+9.9%</b>淘抖整体</span><span><b>−8.6%</b>淘宝GMV</span><span><b>+21.1%</b>抖音GMV</span></div>
+            <blockquote>热门不等于机会，关键是增长来自哪里。</blockquote>
+          </article>
+
+          <article class="story-step" data-story-step="ai">
+            <small>03 · 沉淀方法</small>
+            <p class="story-bridge">当整理、拆解和解释不断重复，我开始追问另一件事。</p>
+            <h3>这些分析方法，<br>能不能被<em>工具记住？</em></h3>
+            <p>我先做了李佳琦直播 Top30 看板，再把真实复盘流程拆成数据上传、指标计算、AI 诊断与行动建议，形成 AI 品牌经营复盘助手 MVP 原型。</p>
+            <div class="story-ai-actions" role="tablist" aria-label="AI分析任务">
+              <button class="is-active" type="button" data-story-ai="异常诊断">异常诊断</button>
+              <button type="button" data-story-ai="增长机会">增长机会</button>
+              <button type="button" data-story-ai="经营周报">经营周报</button>
+            </div>
+            <blockquote>从看见数字，到解释原因，再到明确下一步。</blockquote>
+          </article>
+        </div>
+
+        <div class="story-stage-wrap">
+          <div class="story-stage" data-story-stage="channel">
+            <div class="story-stage-top"><span data-stage-index>01 / CHANNEL</span><b>DATA → JUDGEMENT → TOOL</b></div>
+            <div class="story-data-line" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+            <div class="stage-scene stage-channel is-active">
+              <div class="sheet-fragment"><span>直播节点</span><b>2025.10</b><i></i><small>自营销售变化</small></div>
+              <div class="brand-node node-hbn"><span>HBN</span><b>−85.0%</b><small>渠道迁移</small></div>
+              <div class="brand-node node-zhijian"><span>至简</span><b>+124.9%</b><small>并非稳定挤压</small></div>
+              <div class="brand-node node-freeplus"><span>芙丽芳丝</span><b>+68.8%</b><small>需求增量</small></div>
+              <svg viewBox="0 0 600 380" aria-hidden="true"><path d="M95 255 C190 140 250 315 335 195 S455 110 530 168"/><circle cx="95" cy="255" r="7"/><circle cx="335" cy="195" r="7"/><circle cx="530" cy="168" r="7"/></svg>
+            </div>
+
+            <div class="stage-scene stage-market">
+              <div class="market-stream tmall-stream"><span>TMALL</span><b>−8.6%</b></div>
+              <div class="market-stream douyin-stream"><span>DOUYIN</span><b>+21.1%</b></div>
+              <div class="market-share"><b>68.6%</b><span>成交来自抖音</span></div>
+              <div class="market-bubble bubble-serum"><b>+195.6%</b><span>非液态精华</span></div>
+              <div class="market-bubble bubble-toner"><b>+28.5%</b><span>化妆水</span></div>
+              <div class="market-bubble bubble-cleanser"><b>+13.4%</b><span>洁面</span></div>
+            </div>
+
+            <div class="stage-scene stage-ai">
+              <div class="ai-demo-head"><span><i></i>AI REVIEW ASSISTANT</span><small>MVP PROTOTYPE</small></div>
+              <div class="ai-demo-flow"><span>Excel</span><i>→</i><span>指标</span><i>→</i><span>诊断</span><i>→</i><span>行动</span></div>
+              <div class="ai-demo-card">
+                <small data-story-ai-label>异常诊断 / AI DIAGNOSIS</small>
+                <h4 data-story-ai-title>异常不在转化，<br>而在流量入口。</h4>
+                <p><b>数据发现</b><span data-story-ai-finding>天猫UV下降，转化率基本稳定。</span></p>
+                <p><b>原因判断</b><span data-story-ai-reason>流量入口是本次波动的主要来源。</span></p>
+                <p class="next"><b>下一步</b><span data-story-ai-next>优先检查搜索入口与商品承接。</span></p>
+              </div>
+            </div>
+
+            <div class="story-character research-version"><img src="assets/ability-market-user-research.png" alt="郝嘉琪整理用户画像与市场信息的三维卡通场景"><p data-character-note>先别急着下结论，<br>让我再拆一层。</p></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="story-outro scene-shell reveal-up">
+        <div class="story-outro-copy"><p>我真正想展示的，不是做过几张表，<br>而是如何把<strong>数据逐步变成判断与洞察。</strong></p><div><span>渠道判断</span><i>→</i><span>市场洞察</span><i>→</i><span>工具沉淀</span></div></div>
+        <div class="story-outro-visual">
+          <div class="outro-browser"><header><i></i><i></i><i></i><span>LIVE COMMERCE / REVIEW</span></header><img src="assets/gmv-preview.png" alt="李佳琦直播GMV看板局部预览"></div>
+          <div class="outro-cards"><span><small>01 / CHANNEL</small><b>同口径比较</b></span><span><small>02 / MARKET</small><b>跨平台拆解</b></span><span><small>03 / TOOL</small><b>沉淀为工具</b></span></div>
+          <img class="outro-mascot" src="assets/ability-market-user-research.png" alt="市场与用户研究三维卡通形象">
+        </div>
+      </footer>
+    </section>
+
+    <section class="scene journey" id="journey" data-scene="04">
+      <div class="journey-shell scene-shell">
+        <header class="journey-heading reveal-up">
+          <p class="eyebrow">04 / MY JOURNEY</p>
+          <h2>我不是突然会做分析的。<br><em>每一步，都在靠近真实业务。</em></h2>
+          <p>从课堂里的模型，到项目中的用户，再到实习里的渠道与销售——方法没有被割裂，而是在一次次真实问题里长出来。</p>
+        </header>
+
+        <div class="journey-timeline reveal-up" role="tablist" aria-label="成长时间线" data-tab-group="journey">
+          <button class="is-active" type="button" role="tab" aria-selected="true" data-tab="journey-foundation"><time>2020—2024</time><b>建立数据直觉</b><span>金融学 · 南航</span></button>
+          <button type="button" role="tab" aria-selected="false" data-tab="journey-practice"><time>2023</time><b>走进真实经营</b><span>直播助农项目</span></button>
+          <button type="button" role="tab" aria-selected="false" data-tab="journey-research"><time>2024—2027</time><b>把研究做深</b><span>国际贸易学 · 东财</span></button>
+          <button type="button" role="tab" aria-selected="false" data-tab="journey-business"><time>2026</time><b>让分析服务行动</b><span>优时颜 · 数据营销</span></button>
+        </div>
+
+        <div class="journey-story reveal-up" data-panels="journey">
+          <article class="journey-chapter is-active" id="journey-foundation" role="tabpanel">
+            <div class="chapter-copy"><p>01 / FOUNDATION</p><h3>先学会用数字，<br>描述一个复杂世界。</h3><span>金融工程、计量经济学、Python 与机器学习，让我习惯先拆变量、找关系，再形成判断。</span><ul><li>南京航空航天大学 · 金融学</li><li>从模型与数据中建立结构化思维</li></ul></div>
+            <figure class="chapter-visual graduation-chapter"><img src="assets/graduation.jpg" alt="郝嘉琪本科毕业照片"><img class="chapter-mascot" src="assets/graduation-mascot.png" alt="毕业主题三维卡通形象"><figcaption>THE START OF<br>STRUCTURED THINKING</figcaption></figure>
+          </article>
+          <article class="journey-chapter" id="journey-practice" role="tabpanel">
+            <div class="chapter-copy"><p>02 / PRACTICE</p><h3>数字第一次，<br>和真实成交连在一起。</h3><span>在阳山水蜜桃助农项目中，我开始关注直播节奏、用户流失节点与 GMV，不只是“做内容”，而是追问内容怎样影响成交。</span><ul><li>直播复盘 · 流失节点 · GMV</li><li>从结果数字回看运营过程</li></ul></div>
+            <figure class="chapter-visual dashboard-chapter"><img src="assets/gmv-preview.png" alt="直播GMV数据看板"><figcaption>FROM CONTENT<br>TO CONVERSION</figcaption></figure>
+          </article>
+          <article class="journey-chapter" id="journey-research" role="tabpanel">
+            <div class="chapter-copy"><p>03 / RESEARCH</p><h3>从“算得出来”，<br>走向“解释得清楚”。</h3><span>硕士阶段的实证研究与市场项目，让我更重视口径、假设和证据链，也开始把用户差异带进市场判断。</span><ul><li>东北财经大学 · 国际贸易学</li><li>专业排名 1 / 30 · GPA 4.4 / 5.0</li></ul></div>
+            <figure class="chapter-visual research-chapter"><img src="assets/data-analysis.png" alt="郝嘉琪进行数据研究的三维卡通形象"><figcaption>QUESTION · METHOD<br>EVIDENCE · ANSWER</figcaption></figure>
+          </article>
+          <article class="journey-chapter" id="journey-business" role="tabpanel">
+            <div class="chapter-copy"><p>04 / BUSINESS</p><h3>让分析离业务近一点，<br>也离行动近一点。</h3><span>在优时颜，我把方法放进日报、渠道复盘、竞品研究和代言人追踪中：数据不再是作业，而是下一步行动的依据。</span><ul><li>销售监控 · 渠道拆解 · 竞品研究</li><li>从发现问题到支持经营判断</li></ul></div>
+            <figure class="chapter-visual work-chapter"><img src="assets/uniskin-team.png" alt="优时颜团队活动照片"><figcaption>DATA CLOSE TO BUSINESS<br>JUDGEMENT CLOSE TO ACTION</figcaption></figure>
+          </article>
+        </div>
+
+        <p class="journey-ending reveal-up">现在，我希望继续做的，是把<strong>数据、市场与用户</strong>放在同一张图里，找到真正值得行动的答案。</p>
+      </div>
+      <div class="scene-index" aria-hidden="true"><span>04</span><i></i><b>JOURNEY</b></div>
+    </section>
+
+    <section class="scene ai-coding" id="ai-coding" data-scene="05">
+      <div class="coding-shell scene-shell">
+        <header class="coding-heading reveal-up">
+          <p class="eyebrow">05 / AI CODING</p>
+          <h2>遇到重复的问题，<br>我也会试着<em>自己做工具。</em></h2>
+          <p>这里不再讲研究结论，只展示我怎样借助 AI，把需求变成能够打开、操作和继续迭代的网页。</p>
+        </header>
+
+        <div class="coding-works reveal-up">
+          <article class="coding-work coding-dashboard">
+            <div class="coding-browser">
+              <div><i></i><i></i><i></i><span>GMV TOP30 / LIVE COMMERCE</span></div>
+              <img src="assets/gmv-preview.png" alt="李佳琦直播间宝贝GMV Top30看板">
+            </div>
+            <footer><span>01 · 已完成</span><h3>李佳琦直播间<br>GMV Top30 看板</h3><p>把直播宝贝明细整理成可按月、季度、品类和关键词筛选的商品排行。</p><div><b>数据清洗</b><b>排行筛选</b><b>网页看板</b></div><a href="file:///D:/就业方向/简历/秋招/codex个人主页/李佳琦直播间%20宝贝%20GMV%20Top30%20看板.html">打开本地作品 ↗</a></footer>
+          </article>
+
+          <article class="coding-work coding-pathpilot">
+            <div class="pathpilot-demo" aria-label="PathPilot界面示意">
+              <aside><strong>PATH<br>PILOT</strong><i></i><i></i><i></i><small>个人作战台</small></aside>
+              <main><header><span>机会追踪</span><b>+ 新增机会</b></header><div class="pilot-stats"><span><b>12</b>进行中</span><span><b>4</b>本周截止</span><span><b>3</b>待跟进</span></div><div class="pilot-board"><section><small>准备中</small><i></i><i></i></section><section><small>已投递</small><i></i><i></i><i></i></section><section><small>面试中</small><i></i></section></div></main>
+            </div>
+            <footer><span>02 · 已完成</span><h3>PathPilot<br>个人申请作战台</h3><p>为申博与校招场景设计的机会管理工具，把岗位、截止时间和跟进状态放进同一套流程。</p><div><b>需求设计</b><b>状态管理</b><b>个人效率</b></div><a href="file:///D:/就业方向/简历/秋招/codex个人主页/PathPilot.html">打开本地作品 ↗</a></footer>
+          </article>
+        </div>
+
+        <section class="coding-next reveal-up">
+          <div class="next-status"><i></i><span>IN PROGRESS / 正在做</span></div>
+          <div><p>下一步，我正在把真实品牌周度复盘流程做成：</p><h3>AI 品牌经营复盘助手</h3><span>上传 Excel → 自动质检 → 指标计算 → AI 诊断 → 行动建议</span></div>
+          <div class="next-links"><a href="file:///D:/就业方向/简历/运营/优时颜取数/PRD-v3-AI-Brand-Review-Assistant.pdf">查看 PRD ↗</a><a href="file:///E:/claudecode/beauty-brand-platform/frontend/index.html">查看未部署网页 ↗</a><small>网页需要在本地开发环境运行，暂未公开部署。</small></div>
+        </section>
+      </div>
+      <div class="scene-index" aria-hidden="true"><span>05</span><i></i><b>AI CODING</b></div>
+    </section>
+
+    <section class="life-notes" id="life" data-scene="06">
+      <div class="life-shell scene-shell">
+        <header class="life-heading reveal-up">
+          <p class="eyebrow">06 / LIFE NOTES</p>
+          <h2>理性地处理数据，<br>也感性地<em>记录生活。</em></h2>
+          <p>工作之外，我用旅行、摄影、做饭和现场音乐，继续练习观察、耐心与好奇心。</p>
+        </header>
+        <div class="life-gallery">
+          <figure class="life-shot life-shot-wide reveal-up"><img src="assets/life-travel-guizhou.jpg" alt="贵州旅行摄影"><figcaption><small>TRAVEL / 旅行</small><b>去不同的地方，刷新观察世界的坐标。</b></figcaption></figure>
+          <figure class="life-shot reveal-up"><img src="assets/life-travel-nanjing.jpg" alt="南京旅行摄影"><figcaption><small>PHOTOGRAPHY / 摄影</small><b>把注意力留给容易被忽略的瞬间。</b></figcaption></figure>
+          <figure class="life-shot reveal-up"><img src="assets/life-cooking-table.jpg" alt="自己制作的一桌饭菜"><figcaption><small>COOKING / 做饭</small><b>准备、试验、复盘，也分享结果。</b></figcaption></figure>
+          <figure class="life-shot life-shot-music reveal-up"><img src="assets/life-concert.png" alt="演唱会现场"><figcaption><small>MUSIC / 现场</small><b>在音乐里充电。</b></figcaption></figure>
+          <article class="life-ring-card reveal-up" aria-label="可交互的生活形象组件">
+            <div class="life-ring-stage" data-life-ring tabindex="0" role="group" aria-roledescription="形象轮播" aria-label="拖动、点击人物或使用方向键切换形象">
+              <i class="life-ring-orbit" aria-hidden="true"></i>
+              <button class="life-ring-item is-active" type="button" data-ring-index="0" aria-label="选择旅行摄影形象"><img src="assets/life-travel-mascot.png" alt="旅行摄影三维卡通形象" draggable="false"></button>
+              <button class="life-ring-item is-next" type="button" data-ring-index="1" aria-label="选择做饭形象"><img src="assets/life-cooking-mascot.png" alt="做饭三维卡通形象" draggable="false"></button>
+              <button class="life-ring-item is-prev" type="button" data-ring-index="2" aria-label="选择演唱会形象"><img src="assets/life-concert-mascot.png" alt="演唱会三维卡通形象" draggable="false"></button>
+            </div>
+            <p class="life-swipe-hint"><span aria-hidden="true">↔</span><span>左右滑一滑，解锁生活里的另一个我</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-shell scene-shell reveal-up">
+        <div class="contact-copy">
+          <p class="eyebrow">CONTACT / 联系我</p>
+          <h2>期待一份工作，<br>也期待一次<em>好合作。</em></h2>
+          <span>如果你正在寻找一位能在研究、数据与运营之间切换的人，欢迎来聊聊。</span>
+        </div>
+        <div class="contact-actions" aria-label="联系方式">
+          <a class="contact-action primary" href="mailto:jiaqi0418@126.com"><i>↗</i><span>发送邮件</span></a>
+          <button class="contact-action" type="button" data-copy-email="jiaqi0418@126.com"><i>◎</i><span>复制邮箱</span></button>
+          <a class="contact-action" href="assets/郝嘉琪简历_27届校招.pdf" target="_blank" rel="noreferrer"><i>▧</i><span>个人简历 PDF</span></a>
+          <a class="contact-action" href="#intro"><i>↑</i><span>回到顶部</span></a>
+        </div>
+      </div>
+      <footer class="contact-footer scene-shell"><span>郝嘉琪 · 数据分析 / 市场研究 / 电商运营</span><a href="#intro">BACK TO TOP ↑</a></footer>
+    </section>
+  </main>
+
+  <dialog class="media-gallery wehab-gallery" data-wehab-gallery aria-label="WeHab 产品与研究图库">
+    <button class="media-close" type="button" data-wehab-close aria-label="关闭 WeHab 图库">×</button>
+    <div class="media-gallery-main"><button type="button" data-wehab-prev aria-label="上一张">←</button><figure><img data-wehab-image src="assets/wehab-platform.png" alt="WeHab 产品与研究资料"><figcaption><small data-wehab-source>WEHAB · PRODUCT SYSTEM</small><b data-wehab-title>智慧康复平台与产品套装</b><span data-wehab-note>把评估、训练与数据监测带到院外康复场景。</span></figcaption></figure><button type="button" data-wehab-next aria-label="下一张">→</button></div>
+    <div class="media-thumbs" aria-label="选择 WeHab 资料"><button class="is-active" type="button" data-wehab-index="0"><img src="assets/wehab-platform.png" alt="WeHab 平台缩略图"></button><button type="button" data-wehab-index="1"><img src="assets/wehab-hardware.png" alt="智能硬件缩略图"></button><button type="button" data-wehab-index="2"><img src="assets/wehab-workflow.png" alt="服务流程缩略图"></button><button type="button" data-wehab-index="3"><img src="assets/wehab-brand.png" alt="Sharpsight 品牌缩略图"></button><button type="button" data-wehab-index="4"><img src="assets/wehab-research.png" alt="疗法研究缩略图"></button></div>
+  </dialog>
+
+  <dialog class="media-gallery" data-media-gallery aria-label="电商助农项目报道合集">
+    <button class="media-close" type="button" data-media-close aria-label="关闭报道合集">×</button>
+    <div class="media-gallery-main"><button type="button" data-media-prev aria-label="上一篇报道">←</button><figure><img data-media-image src="assets/peach-media-toutiao.png" alt="电商助农项目媒体报道"><figcaption><small data-media-source>今日头条 · 扬州晚报</small><b data-media-title>桃萄夏乡 赋能电商——社会实践团队开启电商赋能新篇章</b><span data-media-date>2022.08.13</span></figcaption></figure><button type="button" data-media-next aria-label="下一篇报道">→</button></div>
+    <div class="media-thumbs" aria-label="选择报道"><button class="is-active" type="button" data-media-index="0"><img src="assets/peach-media-toutiao.png" alt="今日头条报道缩略图"></button><button type="button" data-media-index="1"><img src="assets/peach-media-tv.png" alt="海门新闻报道缩略图"></button><button type="button" data-media-index="2"><img src="assets/peach-media-haimen.png" alt="海门日报报道缩略图"></button><button type="button" data-media-index="3"><img src="assets/peach-media-campus.png" alt="南京校园报道缩略图"></button><button type="button" data-media-index="4"><img src="assets/peach-media-college.png" alt="经管学院报道缩略图"></button><button type="button" data-media-index="5"><img src="assets/peach-media-youth.png" alt="江苏共青团报道缩略图"></button></div>
+  </dialog>
+
+  <dialog class="review-gallery" aria-label="复盘助手网页截图相册">
+    <header><div><strong data-review-title>品牌经营驾驶舱</strong><p>界面演示 · 数据为模拟数据</p></div><button type="button" data-review-close aria-label="关闭 / Close">×</button></header>
+    <div class="review-image-stage"><img data-review-image src="assets/brand-review-screen-1.png" alt="品牌经营驾驶舱"></div>
+    <footer><button type="button" data-review-prev aria-label="上一页 / Previous">←</button><span data-review-count aria-live="polite">1 / 6</span><button type="button" data-review-next aria-label="下一页 / Next">→</button></footer>
+    <div class="review-thumbnails" data-review-thumbnails aria-label="选择页面 / Choose a page"></div>
+  </dialog>
+  <div class="copy-toast" role="status" aria-live="polite">邮箱已复制</div>
+
+  <script src="script.js"></script>
+  <script src="review-gallery.js"></script>
+</body>
+</html>
